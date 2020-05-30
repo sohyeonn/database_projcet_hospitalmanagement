@@ -1,4 +1,13 @@
-<!--2020.05.18 16011164 윤소현-->
+<!--2020.05.31 16011164 윤소현-->
+<?php
+  include './dbconn.php';
+  //$cid = $_GET['id']; //main2.php 19번줄
+
+  $query = "select * from 병실재고";
+  
+  $result = mysqli_query($conn, $query);
+
+?>
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -7,7 +16,7 @@
 -->
 <html>
 	<head>
-		<title>No Sidebar - Strongly Typed by HTML5 UP</title>
+		<title>병실재고</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -20,7 +29,7 @@
 					<div class="container">
 
 						<!-- Logo -->
-							<h1 id="logo">기타 재고 관리</h1>
+							<h1 id="logo">병실 재고 관리</h1>
 
 						<!-- Nav -->
 						<nav id="nav">
@@ -58,9 +67,9 @@
 								<li><a class="icon solid fa-cog" href="#"><span>
 									Inventory Management</span></a>
 									<ul>
-										<li><a href="수술실재고.html">수술실 재고</a></li>
-										<li><a href="병실재고.html">병실 재고</a></li>
-										<li><a href="기타재고.html">기타 재고</a></li>
+										<li><a href="수술실재고.php">수술실 재고</a></li>
+										<li><a href="병실재고.php">병실 재고</a></li>
+										<li><a href="기타재고.php">기타 재고</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -76,9 +85,33 @@
 
 							<!-- Post -->
 								<article class="box post">
-									<header>
-										<h2>탕비실이나 사무용품 이런것들 관리하는 페이지</h2>
-									</header>
+								<center>
+											
+											<form name="stock_content" action="orderstock.php" method="GET">			
+												<table id="myTable" width="800" border="1">
+													<tr>
+														<th>번호</th>
+														<th>이름</th>
+														<th>갯수</th>
+														<th>추가주문필요</th>
+														<th>추가주문하기</th>
+													</tr>
+													<!--<td><a href='content.php?id=$row[id]'>$row[id]</a></td>-->
+													<?php
+													while ($row = mysqli_fetch_array($result)){
+														?><form name="stock_content" action="orderstockr.php" method="GET"><?		
+														echo "<tr>
+														<td>$row[id]</td>			
+														<td>$row[name]</td>												
+														<td>$row[num]</td>
+														<td>$row[outofstock]</td>
+														<input type='hidden' name='strname' value=$row[name]>
+														<td><input type='submit' value='주문'></td>
+													</tr>";?></form><?
+														}
+													?>  
+												</table>											
+										</center>
 
 								</article>
 

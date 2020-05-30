@@ -21,7 +21,7 @@
 <html>
 
 	<head>
-		<title>수술방 관리</title>
+		<title>수술실 예약현황</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -72,9 +72,9 @@
 										<li><a class="icon solid fa-cog" href="#"><span>
 											Inventory Management</span></a>
 											<ul>
-												<li><a href="수술실재고.html">수술실 재고</a></li>
-												<li><a href="병실재고.html">병실 재고</a></li>
-												<li><a href="기타재고.html">기타 재고</a></li>
+												<li><a href="수술실재고.php">수술실 재고</a></li>
+												<li><a href="병실재고.php">병실 재고</a></li>
+												<li><a href="기타재고.php">기타 재고</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -97,9 +97,9 @@
 								<?php
 									while ($row = mysqli_fetch_array($result)){
 										echo "<tr>															
-                                            <td>$row[호실]</label></td>
-                                            <td>$row[환자]</label></td>
-                                            <td>$row[담당의사]</label></td>
+                                            <td>호실$row[호실]</label></td>
+                                            <td>환자번호$row[환자]</label></td>
+                                            <td>담당의사번호$row[담당의사]</label></td>
                                             <div>
 										</tr>";
 										}

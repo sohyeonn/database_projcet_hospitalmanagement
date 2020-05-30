@@ -16,7 +16,7 @@
 -->
 <html>
 	<head>
-		<title>No Sidebar - Strongly Typed by HTML5 UP</title>
+		<title>환자업데이트</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -67,9 +67,9 @@
 								<li><a class="icon solid fa-cog" href="#"><span>
 									Inventory Management</span></a>
 									<ul>
-										<li><a href="수술실재고.html">수술실 재고</a></li>
-										<li><a href="병실재고.html">병실 재고</a></li>
-										<li><a href="기타재고.html">기타 재고</a></li>
+										<li><a href="수술실재고.php">수술실 재고</a></li>
+										<li><a href="병실재고.php">병실 재고</a></li>
+										<li><a href="기타재고.php">기타 재고</a></li>
 									</ul>
 								</li>
 							</ul>
