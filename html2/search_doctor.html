@@ -1,3 +1,4 @@
+<!--김효진-->
 <?php
 
 $db_host = "localhost";

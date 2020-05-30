@@ -1,3 +1,4 @@
+<!--김효진-->
 <?
   function dbconn(){
   $host_name="localhost";
