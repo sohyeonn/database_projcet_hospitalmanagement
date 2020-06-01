@@ -1,32 +1,34 @@
-<!--김효진-->
-<?php
-
-$db_host = "localhost";
-$db_user = "root";
-$db_passwd = "0000";
-$db_name = "project";
-
-$mysqli = new mysqli ($db_host, $db_user, $db_passwd, $db_name);
-
-if ($mysqli->connect_errno) {
-    die('Connection Error : '.$mysqli->connect_error);
-} else {
-    echo "<center>DB 연결 완료!!</center>";
-}
-$id = $_GET['id'];
-$pw = $_GET['psw'];
-$name = $_GET['name'];
-$age = $_GET['age'];
-$ident = $_GET['ident'];
-$gender = $_GET['gender'];
-$phone = $_GET['phone'];
-
-$sql=INSERT into  환자(이름, 아이디, 비밀번호, 주민번호, 연락처, 나이, 성별, 치료날짜) VALUES('$name', '$id', '$pw', '$ident', '$phone', '$age', '$gender','')";
-?>
-
+<!--2020.06.02 18013175 김효진-->
 <html>
 	<head>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			#years{
+				display : block;
+				margin : 0 auto;
+				width:100px;
+				height:50px;
+			}
+			#months{
+				display : block;
+				margin : 0 auto;
+				width:100px;
+				height:50px;
+			}
+			#days{
+				display : block;
+				margin : 0 auto;
+				width:100px;
+				height:50px;
+			}
+			#choiceTime{
+				display : block;
+				margin : 0 auto;
+				width:100px;
+				height:50px;
+			}
+		</style>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script type="text/javascript">
@@ -34,7 +36,7 @@ $sql=INSERT into  환자(이름, 아이디, 비밀번호, 주민번호, 연락�
       $(function() {
 
       //populate our years select box
-      for (i = 1920; i < new Date().getFullYear()+1; i++){
+      for (i = 2020; i < new Date().getFullYear()+5; i++){
           $('#years').append($('<option />').val(i).html(i));
       }
       //populate our months select box
@@ -68,7 +70,44 @@ $sql=INSERT into  환자(이름, 아이디, 비밀번호, 주민번호, 연락�
               return new Date(year, month, 0).getDate();
         }
 
-</script>
+				function timeConstraint(optTime) {
+						const toDay = new Date();
+						const toYear = toDay.getFullYear().toString();
+						const toMonth = toDay.getMonth().toString();
+						const toDate = toDay.getDate().toString();
+						const toSecond = toDay.getSeconds().toString();
+
+						lastTimeConstraint(toYear, toMonth, toDate, toSecond, function(lastDay) {
+							if(lastDay.getTime() > toDay.getTime()) {
+								const choHour = optTime.substring(0, 2);
+								const choMinute = optTime.substring(2, 4);
+								const optDay = new Date(toYear, toMonth, toDate, choHour, choMinute, toSecond);
+									if(optDay.getTime() < toDay.getTime()) {
+										alert("선택하신 시간은 경과하여\n예약을 진행 할 수 없습니다.");
+										document.getElementById("choiceTime").options[0].selected = true;
+										return;
+									}
+									else {
+										alert("선택하신 시간으로\n예약이 진행됩니다.");
+											return;
+										}
+									}
+									else {
+										alert("금일 예약가능한 시간이 모두 지났습니다.\n내일 다시 예약하여 주시기 바랍니다.");
+										document.getElementById("choiceTime").options[0].selected = true;
+										return;
+									}
+								});
+							}
+
+							function lastTimeConstraint(toYear, toMonth, toDate, toSecond, callBack) {
+								const lastTime = document.getElementById("choiceTime").lastElementChild.value;
+								const lastHour = lastTime.substring(0, 2);
+								const lastMinute = lastTime.substring(2, 4);
+								const lastDay = new Date(toYear, toMonth, toDate, lastHour, lastMinute, toSecond);
+								callBack(lastDay);
+							}
+						</script>
 
 		<title>Strongly Typed by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -86,48 +125,45 @@ $sql=INSERT into  환자(이름, 아이디, 비밀번호, 주민번호, 연락�
 							<h1 id="logo"><a href="index.html">Hospital Reservation</a></h1>
 
 						<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a>
+            <nav id="nav">
 								<ul>
-									<li><a href="doctor.html">의료진 조회</a></li>
-								</ul>
-							</li>
+									<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a>
+									<ul>
+										<li><a href="doctor.html">의료진 조회</a></li>
+									</ul>
+								</li>
 
-								<li>
-										<a href="#" class="icon fa-chart-bar"><span>Reservation</span></a>
-								<ul>
-								<li><a href="#">예약 관리</a>
-								<ul>
-									<li><a href="res_department.html">예약하기</a></li>
-									<li><a href="searching.html">예약 조회</a></li>
-								</ul>
-							</li>
-								</ul>
-							</li>
-								<li>
-									<a href="#" class="icon solid fa-sitemap"><span>Hospital Management</span></a>
+									<li>
+											<a href="#" class="icon solid fa-cog"><span>Reservation</span></a>
 									<ul>
-										<li><a href="장기기증.php">장기기증</a></li>
-										<li><a href="#">수술실 관리</a>
-											<ul>
-												<li><a href="수술실예약현황.php">수술실 현황</a></li>
-												<li><a href="수술실관리.php">수술실 예약관리</a></li>
-											</ul>
-										</li>
+									<li><a href="#">예약 관리</a>
+									<ul>
+										<li><a href="res_department.html">예약하기</a></li>
+										<li><a href="searching.html">예약 조회</a></li>
 									</ul>
 								</li>
-								<li><a class="icon solid fa-retweet" href="환자관리.php"><span>Patient Management</span></a></li>
-								<li><a class="icon solid fa-cog" href="#"><span>
-									Inventory Management</span></a>
-									<ul>
-										<li><a href="수술실재고.php">수술실 재고</a></li>
-										<li><a href="병실재고.php">병실 재고</a></li>
-										<li><a href="기타재고.php">기타 재고</a></li>
 									</ul>
 								</li>
-							</ul>
-						</nav>
+									<li>
+										<a href="#" class="icon fa-chart-bar"><span>Hospital Management</span></a>
+										<ul>
+											<li><a href="수술실관리.html">수술실 관리</a></li>
+											<li><a href="장기기증.html">장기기증</a></li>
+											<li>
+												<a href="#">재고관리</a>
+												<ul>
+													<li><a href="수술실재고.html">수술실 재고</a></li>
+													<li><a href="병실재고.html">병실 재고</a></li>
+													<li><a href="기타재고.html">기타 재고</a></li>
+												</ul>
+											</li>
+											<li><a href="환자관리.html">환자 관리</a></li>
+										</ul>
+									</li>
+									<li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
+									<li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
+								</ul>
+							</nav>
 
 					</div>
 				</section>
@@ -137,14 +173,26 @@ $sql=INSERT into  환자(이름, 아이디, 비밀번호, 주민번호, 연락�
 					<div class="container">
 						<header>
 							<h2><strong>Reservation</strong></h2>
+              <form class="content" method="get">
 
               <select id="years"></select>년
               <select id="months"></select>월
               <select id="days"></select>일
+							<select id="choiceTime" onChange="timeConstraint(this.value);">
+								<option value="" selected>-선택 -</option>
+								<option value="09">09:00</option>
+								<option value="10">10:00</option>
+								<option value="11">11:00</option>
+								<option value="12">12:00</option>
+								<option value="13">13:00</option>
+								<option value="14">14:00</option>
+								<option value="15">15:00</option>
+								<option value="16">16:00</option>
+								<option value="17">17:00</option>
+								<option value="18">18:00</option><
+							</select><br>
 
-              <form class="" action="index.html" method="post">
-
-              <input type="submit" name="submit" value="선택">
+              <input class="content" type="button" value="선택">
               </form>
 
 						</header>
@@ -240,6 +288,8 @@ $sql=INSERT into  환자(이름, 아이디, 비밀번호, 주민번호, 연락�
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/res_date.js"></script>
+
 
 	</body>
 </html>
