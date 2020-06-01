@@ -1,7 +1,7 @@
-<!--김효진-->
+<!--2020.06.02 18013175 김효진-->
 <html>
 <head>
-		<title>Strongly Typed by HTML5 UP</title>
+		<title>세종병원</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,47 +19,44 @@
 
 						<!-- Nav -->
 						<nav id="nav">
-							<ul>
-								<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a>
 								<ul>
-									<li><a href="doctor.html">의료진 조회</a></li>
-								</ul>
-							</li>
+									<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a>
+									<ul>
+										<li><a href="doctor.html">의료진 조회</a></li>
+									</ul>
+								</li>
 
-								<li>
-										<a href="#" class="icon fa-chart-bar"><span>Reservation</span></a>
-								<ul>
-								<li><a href="#">예약 관리</a>
-								<ul>
-									<li><a href="res_department.html">예약하기</a></li>
-									<li><a href="searching.html">예약 조회</a></li>
-								</ul>
-							</li>
-								</ul>
-							</li>
-								<li>
-									<a href="#" class="icon solid fa-sitemap"><span>Hospital Management</span></a>
+									<li>
+											<a href="#" class="icon solid fa-cog"><span>Reservation</span></a>
 									<ul>
-										<li><a href="장기기증.php">장기기증</a></li>
-										<li><a href="#">수술실 관리</a>
-											<ul>
-												<li><a href="수술실예약현황.php">수술실 현황</a></li>
-												<li><a href="수술실관리.php">수술실 예약관리</a></li>
-											</ul>
-										</li>
+									<li><a href="#">예약 관리</a>
+									<ul>
+										<li><a href="res_department.html">예약하기</a></li>
+										<li><a href="searching.html">예약 조회</a></li>
 									</ul>
 								</li>
-								<li><a class="icon solid fa-retweet" href="환자관리.php"><span>Patient Management</span></a></li>
-								<li><a class="icon solid fa-cog" href="#"><span>
-									Inventory Management</span></a>
-									<ul>
-										<li><a href="수술실재고.php">수술실 재고</a></li>
-										<li><a href="병실재고.php">병실 재고</a></li>
-										<li><a href="기타재고.php">기타 재고</a></li>
 									</ul>
 								</li>
-							</ul>
-						</nav>
+									<li>
+										<a href="#" class="icon fa-chart-bar"><span>Hospital Management</span></a>
+										<ul>
+											<li><a href="수술실관리.html">수술실 관리</a></li>
+											<li><a href="장기기증.html">장기기증</a></li>
+											<li>
+												<a href="#">재고관리</a>
+												<ul>
+													<li><a href="수술실재고.html">수술실 재고</a></li>
+													<li><a href="병실재고.html">병실 재고</a></li>
+													<li><a href="기타재고.html">기타 재고</a></li>
+												</ul>
+											</li>
+											<li><a href="환자관리.html">환자 관리</a></li>
+										</ul>
+									</li>
+									<li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
+									<li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
+								</ul>
+							</nav>
 
 
 				</section>
@@ -69,21 +66,21 @@
 					<div class="container">
 						<header>
 							<h2><strong>Department</strong></h2>
-							<form name="Department">
+							<form name="Department" method="get">
 
-							<input type="radio" name="Depart_radio" id="Surgery" value="1"/>General Surgery
-							<input type="radio" name="Depart_radio" id="Internal Medicine" value="2" />Internal Medicine
-							<input type="radio" name="Depart_radio" id="Chest Surgery" value="3" />Chest Surgery
-							<input type="radio" name="Depart_radio" id="Orthopedic Surgery" value="4" />Orthopedic Surgery
-							<input type="radio" name="Depart_radio" id="Neurosurgery" value="5" />Neurosurgery
-							<input type="radio" name="Depart_radio"id="Gynecology" value="6" />Gynecology<br>
-							<input type="radio" name="Depart_radio" id="Urology" value="7" />Urology
-							<input type="radio" name="Depart_radio" id="Anesthesiology and Painology" value="8" />Anesthesiology and Painology
-							<input type="radio" name="Depart_radio" id="Otolaryngology" value="9" /> Otolaryngology
-							<input type="radio" name="Depart_radio" id="Pediatrics" value="10" />Pediatrics
-							<input type="radio" name="Depart_radio" id="Emergency Medicine" value="11" />Emergency Medicine
+							<input type="radio" name="Depart_radio" id="Surgery" value="1"/>외과
+							<input type="radio" name="Depart_radio" id="Internal Medicine" value="2" />내과
+							<input type="radio" name="Depart_radio" id="Chest Surgery" value="3" />흉부외과
+							<input type="radio" name="Depart_radio" id="Orthopedic Surgery" value="4" />정형외과
+							<input type="radio" name="Depart_radio" id="Neurosurgery" value="5" />신경외과
+							<input type="radio" name="Depart_radio"id="Gynecology" value="6" />산부인과<br>
+							<input type="radio" name="Depart_radio" id="Urology" value="7" />비뇨기과
+							<input type="radio" name="Depart_radio" id="Anesthesiology and Painology" value="8" />마취통증의학과
+							<input type="radio" name="Depart_radio" id="Otolaryngology" value="9" />이비인후과
+							<input type="radio" name="Depart_radio" id="Pediatrics" value="10" />소아과
+							<input type="radio" name="Depart_radio" id="Emergency Medicine" value="11" />응급의학과
 							<br>
-              <input type="button" value="선택">
+              <input class="content" type="button" value="선택">
 
 							</form>
 						</header>
@@ -179,6 +176,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/res_depart.js"></script>
 
 	</body>
 </html>
