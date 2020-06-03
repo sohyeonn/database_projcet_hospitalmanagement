@@ -1,9 +1,9 @@
-<!--2020.05.26 16011164 윤소현-->
+<!--2020.06.03 16011164 윤소현-->
 <?php
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "select * from 기증";
+  $query = "select * from 장기기증";
   
   $result = mysqli_query($conn, $query);
 
@@ -85,8 +85,28 @@
 						<div id="content">
 							<!-- Post -->
 								<article class="box post">
-								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"><br><br>
-										
+									<form action="organs_addok.php">
+										<select name="orgname">
+											<option value="0">장기의 이름을 선택하세요</option>
+											<option value="1">신장</option>
+											<option value="2">간장</option>
+											<option value="3">췌장</option>
+											<option value="4">심장</option>
+											<option value="5">폐</option>
+											<option value="6">소장</option>
+											<option value="7">췌도</option>
+											<option value="8">안구</option>
+											<option value="9">골수</option>
+											<option value="10">말초혈</option>
+											<option value="11">손</option>
+											<option value="12">팔</option>
+											<option value="13">발</option>
+											<option value="14">다리</option>
+											
+										</select>
+										<input type="text" name = "orgnum" placeholder="추가할 갯수를 입력하세요"><br>
+										<input type="submit">
+									</form>
 								</article>
 
 						</div>

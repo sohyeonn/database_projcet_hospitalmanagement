@@ -1,9 +1,9 @@
-<!--2020.05.29 16011164 윤소현-->
+<!--2020.06.03 16011164 윤소현-->
 <?php
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "select * from 기증";
+  $query = "select * from 장기기증";
   
   $result = mysqli_query($conn, $query);
 
@@ -91,25 +91,21 @@
 											<form name="frm_content" action="update.php?uid=<? echo $cid; ?>" method="post">
 												<table id="myTable" width="800" border="1">
 													<tr>
-														<th>기증품목번호</th>
 														<th>기증품목이름</th>
 														<th>갯수</th>
-														<th>기증자번호</th>
 													</tr>
 													<!--<td><a href='content.php?id=$row[id]'>$row[id]</a></td>-->
 													<?php
 													while ($row = mysqli_fetch_array($result)){
-														echo "<tr>															
-															<td><input type='text' name='org_num' value=$row[기증품목번호]></td>
-															<td><input type='text' name='org_kind'value=$row[기증품목이름]></td>
-															<td><input type='text' name='org_cnt' value=$row[갯수]></td>
-															<td><input type='text' name='org_pat_num' value=$row[기증자번호]></td>
+														echo "<tr>				
+															<td>$row[name]</td>
+															<td>$row[num]</td>
 														</tr>";
 													  }
 													?>  
 													<tr>
-														<td><input type="button" value="추가" onclick=organs_add()"></td> <!--submit을 사용하기 위해서는 form태그가 필요하다-->
-														<td><input type="button" value="사용" onclick="organs_delete()"></td>
+														<td><input type="button" value="추가" onclick="organs_add()"></td> <!--submit을 사용하기 위해서는 form태그가 필요하다-->
+														<!--<td><input type="button" value="사용" onclick="organs_delete()"></td>-->
 													</tr>
 												</table>
 											</form>

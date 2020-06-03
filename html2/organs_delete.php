@@ -1,9 +1,10 @@
 <!--2020.05.26 16011164 윤소현-->
+<!--필요없는 페이지-->
 <?php
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "select * from 기증";
+  $query = "select * from 장기기증";
   
   $result = mysqli_query($conn, $query);
 
@@ -17,7 +18,7 @@
 -->
 <html>
 	<head>
-		<title>장기이식삭제</title>
+		<title>장기기증삭제</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />

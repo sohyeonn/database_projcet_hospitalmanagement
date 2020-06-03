@@ -87,7 +87,7 @@
 								<article class="box post">
 								<center>
 											
-											<form name="stock_content" action="orderstock.php" method="GET">			
+											<form name="stock_content" action="orderstocke.php" method="GET">			
 												<table id="myTable" width="800" border="1">
 													<tr>
 														<th>번호</th>

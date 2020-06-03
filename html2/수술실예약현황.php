@@ -97,9 +97,9 @@
 								<?php
 									while ($row = mysqli_fetch_array($result)){
 										echo "<tr>															
-                                            <td>호실$row[호실]</label></td>
-                                            <td>환자번호$row[환자]</label></td>
-                                            <td>담당의사번호$row[담당의사]</label></td>
+                                            <td>$row[호실]호실</td>
+                                            <td>환자번호$row[환자]</td>
+                                            <td>담당의사번호$row[담당의사]</td>
                                             <div>
 										</tr>";
 										}

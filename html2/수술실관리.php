@@ -1,4 +1,9 @@
-<!--2020.05.27 16011164 윤소현-->
+<!--2020.06.03 16011164 윤소현-->
+<!--
+	해야될것
+	1. 환자와 담당의사가 매치되지 않을때 에러 발생
+	2. 환자 번호와 의사 번호가 아닌 이름으로
+-->
 <?php
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
@@ -100,134 +105,112 @@
 
 								</article>
 								<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<?php
-									while ($row = mysqli_fetch_array($result1)){
-										echo "<tr>															
-											<td>$row[호실]</label></td>
-										</tr>";
-										}
-								?>  
-
+									<?php
+										while ($row = mysqli_fetch_array($result1)){
+											echo "<tr>															
+												<td>$row[호실]</label></td>
+											</tr>";
+											}
+									?>  
+								</div>
 								<header>
 										<center><h2>퇴실가능 수술방</h2></center>
 								</header>
 
 								</article>
 								<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<?php
-									while ($row = mysqli_fetch_array($result2)){
-										echo "<tr>															
-											<td>$row[호실]</label></td>
-										</tr>";
-										}
-								?>  
-								<header>
-										<center><h2>수술방을 선택해주세요</h2></center>
-								</header>
-								<div>&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="my-input" id="1">
-									<label for="1">1번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="2">
-									<label for="2">2번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="3">
-									<label for="3">3번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="4">
-									<label for="4">4번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="5">
-									<label for="5">5번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="6">
-									<label for="6">6번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="7">
-									<label for="7">7번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="8">
-									<label for="8">8번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="9">
-									<label for="9">9번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="10">
-									<label for="10">10번 수술방</label>
-									&nbsp;
-									<br><br>
-									<input type="radio" name="my-input" id="11">
-									<label for="11">11번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="12">
-									<label for="12">12번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="13">
-									<label for="13">13번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="14">
-									<label for="14">14번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="15">
-									<label for="15">15번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="16">
-									<label for="16">16번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="17">
-									<label for="17">17번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="18">
-									<label for="18">18번 수술방</label>
-									&nbsp;
-									<input type="radio" name="my-input" id="19">
-									<label for="19">19번 수술방</label>
-								  &nbsp;
-									<input type="radio" name="my-input" id="20">
-									<label for="20">20번 수술방</label>
-									&nbsp;
-									<br><br>
-								  </div>
+									<?php
+										while ($row = mysqli_fetch_array($result2)){
+											echo "<tr>															
+												<td>$row[호실]</label></td>
+											</tr>";
+											}
+									?>  
+								</div>
+								<form action="surgeryroomupdate.php">
+									<br>
+									<center>
+										<input type=text name="patientnum" placeholder="환자 번호"><br>
+										<input type=text name="docnum" placeholder="의사 번호"><br>
+										<select name="book-select" id="surgery_res">
+											<option value="in">예약</option>
+											<option value="out">퇴실</option>
+										</select>
+										<br>
+										<select name="room-select" id="surgeryroom_res">
+											<option value="1">1번수술방</option>
+											<option value="2">2번수술방</option>
+											<option value="3">3번수술방</option>
+											<option value="4">4번수술방</option>
+											<option value="5">5번수술방</option>
+											<option value="6">6번수술방</option>
+											<option value="7">7번수술방</option>
+											<option value="8">8번수술방</option>
+											<option value="9">9번수술방</option>
+											<option value="10">10번수술방</option>
+											<option value="11">11번수술방</option>
+											<option value="12">12번수술방</option>
+											<option value="13">13번수술방</option>
+											<option value="14">14번수술방</option>
+											<option value="15">15번수술방</option>
+											<option value="16">16번수술방</option>
+											<option value="17">17번수술방</option>
+											<option value="18">18번수술방</option>
+											<option value="19">19번수술방</option>
+											<option value="20">20번수술방</option>
 
-								  <div>
-									  <hr><br>
-									  <center><h2>특이사항</h2>
-									<input type="checkbox" name="my-checkbox" id="opt-in">&nbsp;&nbsp;
-									<label for="opt-in">응급</label>
-									<input type="checkbox" name="my-checkbox" id="opt-in2">&nbsp;&nbsp;
-									<label for="opt-in2">마취과 필요</label>
-									<input type="checkbox" name="my-checkbox" id="opt-in3">&nbsp;&nbsp;
-									<label for="opt-in3">입원</label>
-									<input type="checkbox" name="my-checkbox" id="opt-in4">&nbsp;&nbsp;
-									<label for="opt-in4">어린이</label>
-									<input type="checkbox" name="my-checkbox" id="opt-in5">&nbsp;&nbsp;
-									<label for="opt-in5">노인</label>
-									<input type="checkbox" name="my-checkbox" id="opt-in6">&nbsp;&nbsp;
-									<label for="opt-in6">장기이식수술</label>
-									<input type="checkbox" name="my-checkbox" id="opt-in7">&nbsp;&nbsp;
-									<label for="opt-in7">VIP</label>
-								</center>
-									<br><br>
-									
-								  </div>
-								  <hr><br>
-								<center>
-								  <select name="my-select" id="surgery_res">
-									<option value="opt1">예약</option>
-									<option value="opt2">퇴실</option>
-								  </select>
-								  
-								  &nbsp;&nbsp;
-								  <input type=text placeholder="환자번호">
-								<br><br>
-								<p><input type="button" id="surgery_button" onclick="button1_click();" value="submit"/></p>
-							</center>
+										</select><br>
+										<select name="orgname" id="surgeryorg">
+											<option value="0">장기이식선택안함</option>
+											<option value="1">신장</option>
+											<option value="2">간장</option>
+											<option value="3">췌장</option>
+											<option value="4">심장</option>
+											<option value="5">폐</option>
+											<option value="6">소장</option>
+											<option value="7">췌도</option>
+											<option value="8">안구</option>
+											<option value="9">골수</option>
+											<option value="10">말초혈</option>
+											<option value="11">손</option>
+											<option value="12">팔</option>
+											<option value="13">발</option>
+											<option value="14">다리</option>
+											
+										</select>
+											<br>
+											
+										
+											<br><br>
+											<div>
+												<hr><br>
+												<h2>특이사항</h2>
+												<input type="checkbox" name="eme" id="opt-in">
+												<label for="opt-in">응급</label>
+												<input type="checkbox" name="ane" id="opt-in2">
+												<label for="opt-in2">마취과 필요</label>
+												<input type="checkbox" name="hos" id="opt-in3">
+												<label for="opt-in3">입원</label>
+												<input type="checkbox" name="chi" id="opt-in4">
+												<label for="opt-in4">어린이</label>
+												<input type="checkbox" name="old" id="opt-in5">
+												<label for="opt-in5">노인</label>
+												<input type="checkbox" name="org" id="opt-in6">
+												<label for="opt-in6">장기이식수술</label>
+												<input type="checkbox" name="vip" id="opt-in7">
+												<label for="opt-in7">VIP</label>
+											</div>
+										</center>
+											<br><br>
+									<p><input type="submit"></p>
+								</form>
+						
 
-									<script>
-									function button1_click() {
-										alert("complete!");
-									}
-									</script>
+								<script>
+								function button1_click() {
+									alert("complete!");
+								}
+								</script>
 						</div>
 					</div>
 				</section>
