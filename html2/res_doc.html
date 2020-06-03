@@ -1,4 +1,4 @@
-<!--2020.06.02 김효진-->
+<!--2020.06.03 김효진-->
 <html>
 <head>
 		<title>Strongly Typed by HTML5 UP</title>
@@ -75,52 +75,21 @@
 								$dbName = 'project';
 								$mysqli = new mysqli($host, $user, $pw, $dbName);
 
-								$depart =
-								$sqp= "select * from 의사 where 소속과='$depart'";
+								$depart =$_GET['depart'];
+								$sql= "select * from 의사 where 소속과='$depart'and 직급 not in ('레지던트','인턴')";
 								$result = mysqli_query($mysqli,$sql);
+								echo '소속과 안내 <br>';
+								echo '1: 외과 	2: 내과 	3:흉부외과 		4:정형외과 		5:신경외과	 6:산부인과 	7:비뇨기과 <br>';
+								echo '8:마취통증의학과 	9:이비인후과 	10:소아과 		11:응급의학과<br><br>';
 
-								while ($row =mysqli_fetch_array($result)){
-								}
-								 ?>
-
-              <input type="radio" name="1" value="1" />김외과
-              <input type="radio" name="1" value="2" />이외과
-              <input type="radio" name="1" value="3" />박외과
-
-              <input type="radio" name="2" value="6" />김내과
-              <input type="radio" name="2" value="7" />이내과
-              <input type="radio" name="2" value="8" />박내과
-              <input type="radio" name="2" value="9" />최내과
-
-              <input type="radio" name="3" value="13" />김흉부
-              <input type="radio" name="3" value="14" />윤흉부
-
-              <input type="radio" name="4" value="16" />김정형
-              <input type="radio" name="4" value="17" />이정형
-              <input type="radio" name="4" value="18" />윤정형
-              <input type="radio" name="4" value="19" />진정형
-
-              <input type="radio" name="5" value="22" />김신경
-              <input type="radio" name="5" value="23" />김신경
-
-              <input type="radio" name="6" value="26" />김산부
-              <input type="radio" name="6" value="27" />김산부
-              <input type="radio" name="6" value="28" />양산부
-
-              <input type="radio" name="7" value="29" />김비뇨
-              <input type="radio" name="7" value="29" />이비뇨
-
-              <input type="radio" name="8" value="31" />김마취
-              <input type="radio" name="8" value="32" />최마취
-
-              <input type="radio" name="9" value="33" />김이비
-              <input type="radio" name="9" value="34" />윤이비
-
-              <input type="radio" name="10" value="38" />김소아
-
-              <input type="radio" name="11" value="41" />김응급
-              <input type="radio" name="11" value="42" />강응급 <br>
-
+								while ($row = mysqli_fetch_array($result)){
+									echo '<input type="radio" name="doctor" value="'.$depart.'"/>';
+									echo '이름 : '.$row['의사이름']. ' 	  ';
+ 									echo '소속과 : '.$row['소속과']. ' 	   ';
+ 									echo '직급 : '.$row['직급']. '  		  ';
+ 									echo '<br>';
+ 								}
+ 								 ?>
               <input class="content" type="button" value="선택">
 
 							</form>
@@ -217,7 +186,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="assets/js/res_doc.js"></script>
 
 	</body>
 </html>
