@@ -1,4 +1,4 @@
-<!--2020.06.02 18013175 김효진-->
+<!--2020.06.03 18013175 김효진-->
 <html>
 	<head>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -77,12 +77,12 @@
 						const toDate = toDay.getDate().toString();
 						const toSecond = toDay.getSeconds().toString();
 
-						lastTimeConstraint(toYear, toMonth, toDate, toSecond, function(lastDay) {
+							lastTimeConstraint(toYear, toMonth, toDate, toSecond, function(lastDay) {
 							if(lastDay.getTime() > toDay.getTime()) {
 								const choHour = optTime.substring(0, 2);
 								const choMinute = optTime.substring(2, 4);
 								const optDay = new Date(toYear, toMonth, toDate, choHour, choMinute, toSecond);
-									if(optDay.getTime() < toDay.getTime()) {
+								if(optDay.getTime() < toDay.getTime()) {
 										alert("선택하신 시간은 경과하여\n예약을 진행 할 수 없습니다.");
 										document.getElementById("choiceTime").options[0].selected = true;
 										return;
@@ -173,7 +173,7 @@
 					<div class="container">
 						<header>
 							<h2><strong>Reservation</strong></h2>
-              <form class="content" method="get">
+              <form class="content" name="Date" method="get">
 
               <select id="years"></select>년
               <select id="months"></select>월
@@ -193,6 +193,21 @@
 							</select><br>
 
               <input class="content" type="button" value="선택">
+							<?php
+							    $host = 'localhost';
+							    $user = 'root';
+							    $pw = '0000';
+							    $dbName = 'project';
+							    $mysqli = new mysqli($host, $user, $pw, $dbName);
+
+									$num=;
+									$name=;
+									$date=new Date();
+									$doctor=
+
+									$sql= "insert into 예약 values ()";
+  								$result = mysqli_query($mysqli,$sql);
+							?>
               </form>
 
 						</header>
