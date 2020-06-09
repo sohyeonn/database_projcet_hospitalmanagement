@@ -18,40 +18,47 @@
 
                 <!-- Nav -->
                 <nav id="nav">
-                  <ul>
-                    <li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a></li>
-                    <li>
-                        <a href="#" class="icon solid fa-cog"><span>Service</span></a>
-                    <ul>
-                    <li><a href="#">조회</a>
-                    <ul>
-                      <li><a href="searching.html">예약 조회</a></li>
-                      <li><a href="doctor.html">의료진 조회</a></li>
-                    </ul>
-                  </li>
-                    <li><a href="res_department.html">예약하기</a></li>
-                    </ul>
-                  </li>
-                    <li>
-                      <a href="#" class="icon fa-chart-bar"><span>Hospital Management</span></a>
-                      <ul>
-                        <li><a href="수술실관리.html">수술실 관리</a></li>
-                        <li><a href="장기기증.html">장기기증</a></li>
-                        <li>
-                          <a href="#">재고관리</a>
-                          <ul>
-                            <li><a href="수술실재고.html">수술실 재고</a></li>
-                            <li><a href="병실재고.html">병실 재고</a></li>
-                            <li><a href="기타재고.html">기타 재고</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="환자관리.html">환자 관리</a></li>
-                      </ul>
-                    </li>
-                    <li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
-                    <li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
-                  </ul>
-                </nav>
+  									<ul>
+  										<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a>
+  										<ul>
+  											<li><a href="doctor_search.html">의료진 조회</a></li>
+  										</ul>
+  									</li>
+
+  										<li>
+  												<a href="#" class="icon fa-chart-bar"><span>Reservation</span></a>
+  										<ul>
+  										<li><a href="#">예약 관리</a>
+  										<ul>
+  											<li><a href="res_department.html">예약하기</a></li>
+  											<li><a href="searching.html">예약 조회</a></li>
+  										</ul>
+  									</li>
+  										</ul>
+  									</li>
+  										<li>
+  											<a href="#" class="icon solid fa-sitemap"><span>Hospital Management</span></a>
+  											<ul>
+  												<li><a href="장기기증.php">장기기증</a></li>
+  												<li><a href="#">수술실 관리</a>
+  													<ul>
+  														<li><a href="수술실예약현황.php">수술실 현황</a></li>
+  														<li><a href="수술실관리.php">수술실 예약관리</a></li>
+  													</ul>
+  												</li>
+  											</ul>
+  										</li>
+  										<li><a class="icon solid fa-retweet" href="환자관리.php"><span>Patient Management</span></a></li>
+  										<li><a class="icon solid fa-cog" href="#"><span>
+  											Inventory Management</span></a>
+  											<ul>
+  												<li><a href="수술실재고.php">수술실 재고</a></li>
+  												<li><a href="병실재고.php">병실 재고</a></li>
+  												<li><a href="기타재고.php">기타 재고</a></li>
+  											</ul>
+  										</li>
+  									</ul>
+  								</nav>
               </div>
 
 
@@ -59,7 +66,7 @@
             <section id="features">
               <div class="container">
                 <header>
-                  <h2><strong>Reservation Search</strong></h2>
+                  <h2><strong>Doctor Search</strong></h2>
                   <?php
                       $host = 'localhost';
                       $user = 'root';
@@ -69,20 +76,17 @@
 
                       $search=$_GET['search'];
 
-                      $sql = "select * from 환자 where 환자번호 = '$search'";
+                      $sql = "select * from 의사 where 의사이름 = '$search'";
                       $result = mysqli_query($mysqli,$sql);
 
+                      echo '소속과 안내 <br>';
+                      echo '1: 외과 2: 내과 3: 흉부외과 4: 정형외과 5: 신경외과 6: 산부인과 7: 비뇨기과 <br>';
+                      echo '8: 마취통증의학과 9: 이비인후과 10: 소아과 11: 응급의학과<br><br>';
+
                       while ($row =mysqli_fetch_array($result)){
-                        echo '이름 : '.$row['이름'].'   ';
-                        echo '병명 : '.$row['병명'].'    ';
-                        /*if($row['담당교수']=1)
-                          echo '담당의사 : 김외과    ';
-                        else if($row['담당교수']=15)
-                            echo '담당의사 : 이흉부    ';
-                        elseif($row['담당교수']=42)
-                                echo '담당의사 : 강응급    ';*/
-                        echo '담당의사 : '.$row['담당교수'].'    ';
-                        echo '치료날짜 : '.$row['치료날짜'].'    ';
+                        echo '이름 : '.$row['의사이름'].'   ';
+                        echo '소속과 : '.$row['소속과'].'    ';
+                        echo '직급 : '.$row['직급'].'    ';
                         echo '<br>';
                     }
                   ?>
