@@ -6,6 +6,7 @@
   $query = "select * from 환자";
   
   $result = mysqli_query($conn, $query);
+  
 
 ?>
 <!DOCTYPE HTML>

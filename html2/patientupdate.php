@@ -6,7 +6,9 @@
   $query = "select * from 환자 where 환자번호='$pid'";
   
   $result = mysqli_query($conn, $query);
-
+  
+  $query1 = "SELECT 의사번호 FROM 의사 WHERE 의사이름 = '$dc'";
+  $r1 = mysqli_query($conn, $query1);
 ?>
 <!DOCTYPE HTML>
 <!--
