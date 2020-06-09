@@ -1,12 +1,12 @@
-<!--2020.05.29 16011164 윤소현-->
+<!--2020.65.09 16011164 윤소현-->
 <?php
   include './dbconn.php';
   $pid = $_GET["patnum"]; //main2.php 19번줄
   
-  $query = "select * from 환자 where 환자번호='$pid'";
+  $query = "SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호 where a.환자번호='$pid';";
   
   $result = mysqli_query($conn, $query);
-  
+
   $query1 = "SELECT 의사번호 FROM 의사 WHERE 의사이름 = '$dc'";
   $r1 = mysqli_query($conn, $query1);
 ?>
@@ -110,15 +110,15 @@
 													<td><input type='text' name='pat_name' value=$row[이름]></td>
 													<td><input type='text' name='pat_phone' value=$row[연락처]></td>
 													<td><input type='text' name='pat_sick' value=$row[병명]></td>
-													<td><input type='text' name='pat_doc' value=$row[담당교수]></td>
+													<td><input type='text' name='pat_doc' value=$row[의사이름]></td>
 													<td><input type='text' name='pat_date' value=$row[치료날짜]></td>
 													<td><input type='text' name='pat_sur' value=$row[수술여부]></td>
                                                     <td><input type='text' name='pat_room' value=$row[호실]></td>
                                                     <td><input type='text' name='pat_pay' value=$row[비용]></td>
 													<td><input type='text' name='pat_org' value=$row[장기이식필요유무]></td>
                                                     <td><input type='text' name='pat_ref' value=$row[특이사항]></td>
-                                                    <input type='hidden' name='pat_num' value=$pid>
-												</tr>";
+													<input type='hidden' name='pat_num' value=$pid>
+													</tr>";
 													}
 												?>  
 												

@@ -3,7 +3,7 @@
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "select * from 환자";
+  $query = "SELECT a.환자번호, a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호;";
   
   $result = mysqli_query($conn, $query);
   
@@ -115,7 +115,7 @@
 													<td>$row[이름]</td>
 													<td>$row[연락처]</td>
 													<td>$row[병명]</td>
-													<td>$row[담당교수]</td>
+													<td>$row[의사이름]</td>
 													<td>$row[치료날짜]</td>
 													<td>$row[수술여부]</td>
 													<td>$row[호실]</td>

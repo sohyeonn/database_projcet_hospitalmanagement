@@ -3,7 +3,7 @@
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "select * from 수술방 where 빈방여부='N'";
+  $query = "SELECT a.호실, b.이름, c.의사이름 from 수술방 as a LEFT OUTER JOIN 환자 as b ON a.환자=b.환자번호 LEFT OUTER JOIN 의사 as c ON a.담당의사=c.의사번호 WHERE a.빈방여부='N';";
   
   $result = mysqli_query($conn, $query);
 
@@ -93,14 +93,13 @@
 									
 
 								</article>
-								<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div>
 								<?php
 									while ($row = mysqli_fetch_array($result)){
-										echo "<tr>															
-                                            <td>$row[호실]호실</td>
-                                            <td>환자번호$row[환자]</td>
-                                            <td>담당의사번호$row[담당의사]</td>
-                                            <div>
+										echo "<tr>	
+											<td>$row[호실] 호실에서 </td>		
+											<td>$row[의사이름] 의사선생님이 </td>			
+                                            <td>환자 $row[이름] 님을 수술중입니다.</td><br>                                           
 										</tr>";
 										}
 								?>  

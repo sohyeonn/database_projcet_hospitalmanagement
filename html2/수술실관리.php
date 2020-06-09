@@ -108,7 +108,7 @@
 									<?php
 										while ($row = mysqli_fetch_array($result1)){
 											echo "<tr>															
-												<td>$row[호실]</label></td>
+												<td>$row[호실]호실&nbsp;</label></td>
 											</tr>";
 											}
 									?>  
@@ -122,7 +122,7 @@
 									<?php
 										while ($row = mysqli_fetch_array($result2)){
 											echo "<tr>															
-												<td>$row[호실]</label></td>
+												<td>$row[호실]호실&nbsp;</label></td>
 											</tr>";
 											}
 									?>  
@@ -130,8 +130,8 @@
 								<form action="surgeryroomupdate.php">
 									<br>
 									<center>
-										<input type=text name="patientnum" placeholder="환자 번호"><br>
-										<input type=text name="docnum" placeholder="의사 번호"><br>
+										<input type=text name="patientnum" placeholder="환자 이름"><br>
+										<input type=text name="docnum" placeholder="의사 이름"><br>
 										<select name="book-select" id="surgery_res">
 											<option value="in">예약</option>
 											<option value="out">퇴실</option>
