@@ -1,3 +1,4 @@
+//김효진
 <?php
     $host = 'localhost';
     $user = 'root';
