@@ -66,7 +66,7 @@
             <section id="features">
               <div class="container">
                 <header>
-                  <h2><strong>Doctor Search</strong></h2>
+                  <h2><strong>Reservation Search</strong></h2>
                   <?php
                       $host = 'localhost';
                       $user = 'root';
@@ -76,17 +76,102 @@
 
                       $search=$_GET['search'];
 
-                      $sql = "select * from 의사 where 의사이름 = '$search'";
+                      $sql = "select * from 환자 where 환자번호 = '$search'";
                       $result = mysqli_query($mysqli,$sql);
 
-                      echo '소속과 안내 <br>';
-                      echo '1: 외과 2: 내과 3: 흉부외과 4: 정형외과 5: 신경외과 6: 산부인과 7: 비뇨기과 <br>';
-                      echo '8: 마취통증의학과 9: 이비인후과 10: 소아과 11: 응급의학과<br><br>';
-
                       while ($row =mysqli_fetch_array($result)){
-                        echo '이름 : '.$row['의사이름'].'   ';
-                        echo '소속과 : '.$row['소속과'].'    ';
-                        echo '직급 : '.$row['직급'].'    ';
+                        echo '이름 : '.$row['이름'].'   ';
+                        echo '병명 : '.$row['병명'].'    ';
+                        if($row['담당교수']==1)
+                          echo '담당의사 : 김외과    '.'   ';
+                        else if($row['담당교수']==2)
+                          echo '담당의사 : 이외과    '.'   ';
+                        else if($row['담당교수']==3)
+                          echo '담당의사 : 박외과    '.'   ';
+                        else if($row['담당교수']==4)
+                          echo '담당의사 : 최외과    '.'   ';
+                        else if($row['담당교수']==5)
+                          echo '담당의사 : 강외과    '.'   ';
+                        else if($row['담당교수']==6)
+                          echo '담당의사 : 김내과    '.'   ';
+                        else if($row['담당교수']==7)
+                          echo '담당의사 : 이내과    '.'   ';
+                        else if($row['담당교수']==8)
+                          echo '담당의사 : 박내과    '.'   ';
+                        else if($row['담당교수']==9)
+                          echo '담당의사 : 최내과    '.'   ';
+                        else if($row['담당교수']==10)
+                          echo '담당의사 : 김내과    '.'   ';
+                        else if($row['담당교수']==11)
+                          echo '담당의사 : 장내과    '.'   ';
+                        else if($row['담당교수']==12)
+                          echo '담당의사 : 윤내과    '.'   ';
+                        else if($row['담당교수']==13)
+                          echo '담당의사 : 김흉부    '.'   ';
+                        else if($row['담당교수']==14)
+                          echo '담당의사 : 윤흉부    '.'   ';
+                        else if($row['담당교수']==15)
+                          echo '담당의사 : 이흉부    '.'   ';
+                        else if($row['담당교수']==16)
+                          echo '담당의사 : 김정형    '.'   ';
+                        else if($row['담당교수']==17)
+                          echo '담당의사 : 이정형    '.'   ';
+                        else if($row['담당교수']==18)
+                          echo '담당의사 : 윤정형    '.'   ';
+                        else if($row['담당교수']==19)
+                          echo '담당의사 : 진정형    '.'   ';
+                        else if($row['담당교수']==20)
+                          echo '담당의사 : 김정형    '.'   ';
+                        else if($row['담당교수']==21)
+                          echo '담당의사 : 김정형    '.'   ';
+                        else if($row['담당교수']==22)
+                          echo '담당의사 : 김신경    '.'   ';
+                        else if($row['담당교수']==23)
+                          echo '담당의사 : 김신경    '.'   ';
+                        else if($row['담당교수']==24)
+                          echo '담당의사 : 이신경    '.'   ';
+                        else if($row['담당교수']==25)
+                          echo '담당의사 : 강신경    '.'   ';
+                        else if($row['담당교수']==26)
+                          echo '담당의사 : 김산부    '.'   ';
+                        else if($row['담당교수']==27)
+                          echo '담당의사 : 김산부    '.'   ';
+                        else if($row['담당교수']==28)
+                          echo '담당의사 : 양산부    '.'   ';
+                        else if($row['담당교수']==29)
+                          echo '담당의사 : 김비뇨    '.'   ';
+                        else if($row['담당교수']==30)
+                          echo '담당의사 : 이비뇨    '.'   ';
+                        else if($row['담당교수']==31)
+                          echo '담당의사 : 김마취    '.'   ';
+                        else if($row['담당교수']==32)
+                          echo '담당의사 : 최마취    '.'   ';
+                        else if($row['담당교수']==33)
+                          echo '담당의사 : 김이비    '.'   ';
+                        else if($row['담당교수']==34)
+                          echo '담당의사 : 윤이비    '.'   ';
+                        else if($row['담당교수']==35)
+                          echo '담당의사 : 우이비    '.'   ';
+                        else if($row['담당교수']==36)
+                          echo '담당의사 : 김=강이비    '.'   ';
+                        else if($row['담당교수']==37)
+                          echo '담당의사 : 지이비    '.'   ';
+                        else if($row['담당교수']==38)
+                          echo '담당의사 : 김소아    '.'   ';
+                        else if($row['담당교수']==39)
+                          echo '담당의사 : 강소아    '.'   ';
+                        else if($row['담당교수']==40)
+                          echo '담당의사 : 이소아    '.'   ';
+                        else if($row['담당교수']==41)
+                          echo '담당의사 : 김응급    '.'   ';
+                        else if($row['담당교수']==42)
+                          echo '담당의사 : 강응급    '.'   ';
+                        else if($row['담당교수']==43)
+                          echo '담당의사 : 임응급    '.'   ';
+                        else if($row['담당교수']==44)
+                          echo '담당의사 : 진응급    '.'   ';
+
+                        echo '치료날짜 : '.$row['치료날짜'].'    ';
                         echo '<br>';
                     }
                   ?>
