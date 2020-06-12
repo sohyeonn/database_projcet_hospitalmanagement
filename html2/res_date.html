@@ -1,4 +1,4 @@
-<!--2020.06.03 18013175 김효진-->
+<!--2020.06.12 18013175 김효진-->
 <html>
 	<head>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -178,9 +178,15 @@
 							<h2><strong>Reservation</strong></h2>
               <form class="content" name="Date" method="get">
 
-              <select id="years"></select>년
-              <select id="months"></select>월
-              <select id="days"></select>일
+              <select id="years">
+								<option value="" selected>-선택 -</option>
+							</select>년
+              <select id="months">
+								<option value="" selected>-선택 -</option>
+							</select>월
+              <select id="days">
+								<option value="" selected>-선택 -</option>
+							</select>일
 							<select id="choiceTime" onChange="timeConstraint(this.value);">
 								<option value="" selected>-선택 -</option>
 								<option value="09">09:00</option>
@@ -195,23 +201,8 @@
 								<option value="18">18:00</option>
 							</select><br>
 
-              <input class="content" type="button" value="선택">
-							<?php
-							    $host = 'localhost';
-							    $user = 'root';
-							    $pw = '0000';
-							    $dbName = 'project';
-							    $mysqli = new mysqli($host, $user, $pw, $dbName);
+              <input class="content" type="button" value="예약">
 
-									$id = $_GET['id'];
-							    $name = $_GET['name'];
-									$date= new Date($("#years option:selected").text();,$("#months option:selected").text();,$("#days option:selected").text();,$("#choiceTime option:selected").text();)
-									$doctor=$_GET['doctor']
-
-									$sql= "insert into 예약 values ('$id','$name','$date','$doctor')";
-  								$result = mysqli_query($mysqli,$sql);
-									echo "<script>alert('예약 완료!');</script>"
-							?>
               </form>
 
 						</header>
