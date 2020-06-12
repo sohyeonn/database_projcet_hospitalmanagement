@@ -64,7 +64,17 @@
 										</li>
 									</ul>
 								</li>
-								<li><a class="icon solid fa-retweet" href="환자관리.php"><span>Patient Management</span></a></li>
+								<li><a class="icon solid fa-retweet" href="#"><span>Patient Management</span></a>
+                                    <ul>
+										<li><a href="#">환자관리</a>
+											<ul>
+												<li><a href="환자관리.php">환자관리</a></li>
+												<li><a href="이전환자관리.php">이전환자</a></li>
+											</ul>
+                                        </li>
+                                        <li><a href="환자완료.php">환자퇴원</a></li>
+									</ul>
+                                </li>
 								<li><a class="icon solid fa-cog" href="#"><span>
 									Inventory Management</span></a>
 									<ul>

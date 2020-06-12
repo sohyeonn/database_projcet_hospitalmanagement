@@ -47,13 +47,13 @@
   if($bs == 'in'){
     $query1 = "UPDATE 수술방 SET 빈방여부='N', 환자=$row1[환자번호], 담당의사=$row2[의사번호] WHERE 호실=$rs";
     $query2 = "INSERT INTO 수술중 VALUES(NULL, $row1[환자번호], $row2[의사번호], $rs, $eme, $ane, $hos, $chi, $old, $org, $vip)";
-    /*if($org != NULL & $on != 0){
+    if($org != NULL & $on != 0){
       $query3 = "UPDATE 장기기증 SET num=num-1 WHERE id=$on";
       $result3 = mysqli_query($conn, $query3);
-      echo " <script> location.href='./장기기증.php'; </script>";
-    }*/
+    }
     $result1 = mysqli_query($conn, $query1);
     $result2 = mysqli_query($conn, $query2);
+    $result3 = mysqli_query($conn, $query3);
     echo " <script> location.href='./수술실관리.php'; </script>";
   }
   else {

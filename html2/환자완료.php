@@ -1,34 +1,16 @@
 <!--2020.06.12 16011164 윤소현-->
 <?php
   include './dbconn.php';
-  //$cid = $_GET['id']; //main2.php 19번줄
-
-  $query = "SELECT * from 기타재고";
+  $pid = $_GET["patnum"]; //main2.php 19번줄
+  
+  $query = "SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, 
+            a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호 where a.환자번호='$pid';";
+  
   $result = mysqli_query($conn, $query);
 
-  $query1 = "UPDATE etctest SET cnt=cnt-1";
-  $result1 = mysqli_query($conn, $query1);
-
-  $query2 = "SELECT * from etctest";
-  $result2 = mysqli_query($conn, $query2);
-  $r2 = mysqli_fetch_array($result2);
-  if($r2['cnt'] < 0){
-	$query3 = "UPDATE 기타재고 SET num=num-1";
-	$result3 = mysqli_query($conn, $query3);
-	$query4 = "UPDATE etctest SET cnt=cnt+10";
- 	 $result4 = mysqli_query($conn, $query4);  
-  }
-
-  $query5 = "SELECT count(*) cntt FROM 기타재고 WHERE num<10";
-  $result5 = mysqli_query($conn, $query5);
-  $row5 = mysqli_fetch_array($result5);
-  if($row5['cntt']>0){
-	  $query6 = "UPDATE 기타재고 SET outofstock='Y' WHERE num<10";
-	  $result6 = mysqli_query($conn, $query6);
-	  echo "<script>alert('재고 부족!');</script>";
-  }
+  $query1 = "SELECT 의사번호 FROM 의사 WHERE 의사이름 = '$dc'";
+  $r1 = mysqli_query($conn, $query1);
 ?>
-
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -37,7 +19,7 @@
 -->
 <html>
 	<head>
-		<title>기타재고</title>
+		<title>환자퇴원</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -50,7 +32,7 @@
 					<div class="container">
 
 						<!-- Logo -->
-							<h1 id="logo">기타 재고 관리</h1>
+							<h1 id="logo">환자 퇴원</h1>
 
 						<!-- Nav -->
 						<nav id="nav">
@@ -116,34 +98,13 @@
 
 							<!-- Post -->
 								<article class="box post">
-								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"><br><br>
-								
-								<center>
-											
-											<form name="stock_content" action="orderstocke.php" method="GET">			
-												<table id="myTable" width="800" border="1">
-													<tr>
-														<th>이름</th>
-														<th>갯수</th>
-														<th>추가주문필요</th>
-														<th>추가주문하기</th>
-													</tr>
-													<!--<td><a href='content.php?id=$row[id]'>$row[id]</a></td>-->
-													<?php
-													while ($row = mysqli_fetch_array($result)){
-														?><form name="stock_content" action="orderstocke.php" method="GET"><?		
-														echo "<tr>			
-														<td>$row[name]</td>												
-														<td>$row[num]</td>
-														<td>$row[outofstock]</td>
-														<input type='hidden' name='stename' value=$row[name]>
-														<td><input type='submit' value='주문'></td>
-													</tr>";?></form><?
-														}
-													?>  
-												</table>											
-										</center>
-
+									<center>
+										<form action="patientbye.php">
+											<input type=text style="text-align:center; width:500px; height:50px;" name="patientbye" placeholder="환자 이름 or 환자 번호 or 병명 or 호실 을 입력하세요"><br>
+											<input type="submit">
+										</form>
+									</center>
+									
 								</article>
 
 						</div>
@@ -154,7 +115,7 @@
 				<section id="footer">
 					<div class="container">
 						<header>
-							<h2>Questions or comments? <strong>Get in touch:</strong></h2>
+							<h2>Questions or comments? <strong>Get in touch :)</strong></h2>
 						</header>
 						<div class="row">
 							<div class="col-6 col-12-medium">
@@ -232,59 +193,20 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+<!--			<Script>
+				function patientupdateok(){
+                    <?
+                        $query = "update 환자 set  where 환자번호 = '$pid'";
+                        mysqli_query($conn, $query);
 
+                        echo " <script> location.href='./main2.php'; </script>";
+
+                    ?>
+
+
+				}
+			</script>
+            -->
 	</body>
 </html>
-<script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
-  window.setTimeout('window.location.reload()',43200000); //86400000=24시간 1000= 1초 
-
-</script>
-<Style>
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-}
-
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 12px;
-}
-
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myInput {
-  background-image: url('./images/search.jpg');
-  background-size: 25px;
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-
-</style>

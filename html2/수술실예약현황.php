@@ -3,7 +3,8 @@
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "SELECT a.호실, b.이름, c.의사이름 from 수술방 as a LEFT OUTER JOIN 환자 as b ON a.환자=b.환자번호 LEFT OUTER JOIN 의사 as c ON a.담당의사=c.의사번호 WHERE a.빈방여부='N';";
+  $query = "SELECT a.호실, b.이름, c.의사이름 from 수술방 as a LEFT OUTER JOIN 환자 as b ON a.환자=b.환자번호 LEFT OUTER JOIN 의사 
+  as c ON a.담당의사=c.의사번호 WHERE a.빈방여부='N';";
   
   $result = mysqli_query($conn, $query);
 
@@ -68,7 +69,17 @@
 												</li>
 											</ul>
 										</li>
-										<li><a class="icon solid fa-retweet" href="환자관리.php"><span>Patient Management</span></a></li>
+										<li><a class="icon solid fa-retweet" href="#"><span>Patient Management</span></a>
+                                    <ul>
+										<li><a href="#">환자관리</a>
+											<ul>
+												<li><a href="환자관리.php">환자관리</a></li>
+												<li><a href="이전환자관리.php">이전환자</a></li>
+											</ul>
+                                        </li>
+                                        <li><a href="환자완료.php">환자퇴원</a></li>
+									</ul>
+                                </li>
 										<li><a class="icon solid fa-cog" href="#"><span>
 											Inventory Management</span></a>
 											<ul>
