@@ -92,15 +92,14 @@
 
 			<!-- Main -->
 				<section id="main">
-					
+				<input type="button" value="추가" onclick="patientadd()"> <!--submit을 사용하기 위해서는 form태그가 필요하다-->
+
 							<!-- Post -->
 								<article class="box post">
 
-								<!--<input type="button" value="추가" onclick="patientadd()">--> <!--submit을 사용하기 위해서는 form태그가 필요하다-->
-								<!-- 추가하면 안됨, 환자 아이디랑 비번 필요-->
-
+								
 									<center>
-											
+										
 										<form name="frm_content" action="patientupdate.php" method="GET">			
 											<table id="myTable" width="800" border="1">
 												<tr>

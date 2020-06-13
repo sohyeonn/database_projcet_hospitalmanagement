@@ -18,8 +18,70 @@
   $old = $_GET['old'];
   $org = $_GET['org'];
   $vip = $_GET['vip'];
+
+  if($bs == 'in'){
+    //in할 수술방이 차있는경우
+    $test1 = "SELECT count(*) t1 FROM 수술중 WHERE 수술방 = '$rs'";
+    $testq1 = mysqli_query($conn, $test1);
+    $testrow1 = mysqli_fetch_array($testq1);
+    if($testrow1['t1']>0){
+      echo '<script> alert("이미 수술실이 사용중입니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
+
+    //환자 없는 경우
+    $test2 = "SELECT count(*) t2 FROM 환자 WHERE 이름 = '$pname'";
+    $testq2 = mysqli_query($conn, $test2);
+    //echo $test2;
+    $testrow2 = mysqli_fetch_array($testq2);
+    if($testrow2['t2']==false){
+      echo '<script> alert("해당 환자가 없습니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
+
+    //환자가 이미 수술하고 있는경우
+    $test3 = "SELECT count(a.이름) t3 from 환자 as a right outer join 수술중 as b on a.환자번호=b.patid where a.이름='$pname'";
+    select * from 환자 as a left outer join 의사 as b on a.담당교수=(select 의사번호 from 의사 where b.의사이름='이흉부');???
+    $testq3 = mysqli_query($conn, $test3);
+    $testrow3 = mysqli_fetch_array($testq3);
+    if($testrow3['t3']==true){
+      echo '<script> alert("해당 환자는 이미 수술중입니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
+
+    //의사가 이미 수술하고 있는경우
+    $test4 = "SELECT count(*) t4 from 의사 WHERE 의사번호='$dname' AND ";
+    $testq4 = mysqli_query($conn, $test4);
+    $testrow4 = mysqli_fetch_array($testq4);
+    if($testrow4['t4']==false){
+      echo '<script> alert("해당 의사는 이미 수술중입니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
+
+    //환자와 의사가 안맞는경우
+    $test5 = "SELECT count(*) t5 from 환자 WHERE 이름='$pname' AND ";
+    $testq4 = mysqli_query($conn, $test5);
+    $testrow5 = mysqli_fetch_array($testq5);
+    if($testrow5['t5']==false){
+      echo '<script> alert("해당 환자는 이미 수술중입니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
+
+    //장기이식 옵션 두개 다 선택이 안된경우
+
+
+  }
+  else{
+    //out할 수술방이 없는 경우
+  }
+
+    
   
-  if ($eme == NULL){$eme = 0;}
+  
+  
+  
+  
+  /*if ($eme == NULL){$eme = 0;}
   else {$eme = 1;}
   if ($ane == NULL){$ane = 0;}
   else {$ane = 1;}

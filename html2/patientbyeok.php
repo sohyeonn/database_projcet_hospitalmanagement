@@ -37,7 +37,7 @@
       echo "<script> location.href='./병실재고관리.php'; </script>";
     } 
   else {
-    echo " <script> location.href='./환자완료.php'; </script>";
+    echo " <script> location.href='./이전환자관리.php'; </script>";
   }
 
 

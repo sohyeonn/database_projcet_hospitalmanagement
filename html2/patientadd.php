@@ -1,14 +1,5 @@
 <!--2020.05.29 16011164 윤소현-->
-<!--이거쓰면안됨!!! 아이디랑 비번때문에 -->
-<?php
-  include './dbconn.php';
-  //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "select * from 환자";
-  
-  $result = mysqli_query($conn, $query);
-
-?>
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -30,7 +21,7 @@
 					<div class="container">
 
 						<!-- Logo -->
-							<h1 id="logo">환자 관리</h1>
+							<h1 id="logo">환자 추가</h1>
 
 						<!-- Nav -->
 						<nav id="nav">
@@ -98,41 +89,21 @@
 								<article class="box post">
 									<center>
 											
-										<form name="frm_content" action="patientupdate.php?uid=<? echo $cid; ?>" method="post">
-											<table id="myTable" width="800" border="1">
-												<tr>
-													<th>이름</th>
-													<th>연락처</th>													
-													<th>병명</th>
-													<th>담당교수</th>
-													<th>치료날짜</th>
-													<th>수술여부</th>
-                                                    <th>호실</th>
-                                                    <th>비용</th>
-													<th>장기이식</th>
-													<th>특이사항</th>
-												</tr>
-												<!--<td><a href='content.php?id=$row[id]'>$row[id]</a></td>-->
-												<?php
-												
-													echo "<tr>															
-													<td><input type='text' name='pat_name' value=$row[이름]></td>
-													<td><input type='text' name='pat_phone' value=$row[연락처]></td>
-													<td><input type='text' name='pat_pat' value=$row[병명]></td>
-													<td><input type='text' name='pat_doc' value=$row[담당교수]></td>
-													<td><input type='text' name='pat_date' value=$row[치료날짜]></td>
-													<td><input type='text' name='pat_sur' value=$row[수술여부]></td>
-                                                    <td><input type='text' name='pat_room' value=$row[호실]></td>
-                                                    <td><input type='text' name='pat_room' value=$row[비용]></td>
-                                                    <td><input type='text' name='pat_room' value=$row[장기이식필요유무]></td>
-													<td><input type='text' name='pat_ref' value=$row[특이사항]></td>
-												</tr>";
-													
-												?>  
-												
-                                            </table>
+										<form name="frm_content" action="patientaddok.php" method="GET">
+											
+												<input type='text' name='pat_name' placeholder="환자 이름" required><br>
+												<input type='text' name='pat_id' placeholder="주민번호" required><br>
+												<input type='text' name='pat_phone' placeholder="전화번호" required><br>
+												<input type='text' name='pat_pat' placeholder="병명" required><br>
+												<input type='text' name='pat_doc' placeholder="담당 의사" required><br>
+												<input type='text' name='pat_sur' placeholder="수술 여부" required><br>
+												<input type='text' name='pat_room' placeholder="호실"><br>
+												<input type='text' name='pat_pay' placeholder="비용" required><br>
+												<input type='text' name='pat_org' placeholder="장기이식여부" required><br>
+												<input type='text' name='pat_ref' placeholder="특이사항"><br>
+                                           
                                             
-										<input type="submit" value="submit" onclick="patientupdate()"> <!--submit을 사용하기 위해서는 form태그가 필요하다-->
+										<input type="submit" value="submit"> <!--submit을 사용하기 위해서는 form태그가 필요하다-->
 											
 										</form>
 									</center>
