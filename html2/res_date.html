@@ -1,4 +1,4 @@
-<!--2020.06.12 18013175 김효진-->
+<!--2020.06.14 18013175 김효진-->
 <html>
 	<head>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -42,6 +42,9 @@
       //populate our months select box
       for (i = 1; i < 13; i++){
           $('#months').append($('<option />').val(i).html(i));
+      }
+			for (i = 9; i < 19; i++){
+          $('#choiceTime').append($('<option />').val(i).html(i));
       }
       //populate our Days select box
       updateNumberOfDays();
@@ -92,11 +95,11 @@
 											return;
 										}
 									}
-									else {
+									/*else {
 										alert("금일 예약가능한 시간이 모두 지났습니다.\n내일 다시 예약하여 주시기 바랍니다.");
 										document.getElementById("choiceTime").options[0].selected = true;
 										return;
-									}
+									}*/
 								});
 							}
 
@@ -138,8 +141,8 @@
 									<ul>
 									<li><a href="#">예약 관리</a>
 									<ul>
-										<li><a href="res_member.html">예약하기</a></li>
-										<li><a href="res_search.html">예약 조회</a></li>
+										<li><a href="res_department.html">예약하기</a></li>
+										<li><a href="searching.html">예약 조회</a></li>
 									</ul>
 								</li>
 									</ul>
@@ -156,17 +159,7 @@
 											</li>
 										</ul>
 									</li>
-									<li><a class="icon solid fa-retweet" href="#"><span>Patient Management</span></a>
-										<ul>
-											<li><a href="#">환자관리</a>
-												<ul>
-													<li><a href="환자관리.php">환자관리</a></li>
-													<li><a href="이전환자관리.php">이전환자</a></li>
-												</ul>
-											</li>
-											<li><a href="환자완료.php">환자퇴원</a></li>
-										</ul>
-									</li>
+									<li><a class="icon solid fa-retweet" href="환자관리.php"><span>Patient Management</span></a></li>
 									<li><a class="icon solid fa-cog" href="#"><span>
 										Inventory Management</span></a>
 										<ul>
@@ -177,6 +170,7 @@
 									</li>
 								</ul>
 							</nav>
+
 					</div>
 				</section>
 
@@ -185,7 +179,7 @@
 					<div class="container">
 						<header>
 							<h2><strong>Reservation</strong></h2>
-              <form class="content" name="Date" method="get">
+              <form class="content" name="Date" action="res_room.html" method="get">
 
               <select id="years">
 								<option value="" selected>-선택 -</option>
@@ -196,21 +190,13 @@
               <select id="days">
 								<option value="" selected>-선택 -</option>
 							</select>일
-							<select id="choiceTime" onChange="timeConstraint(this.value);">
+							<select id="choiceTime" >
 								<option value="" selected>-선택 -</option>
-								<option value="09">09:00</option>
-								<option value="10">10:00</option>
-								<option value="11">11:00</option>
-								<option value="12">12:00</option>
-								<option value="13">13:00</option>
-								<option value="14">14:00</option>
-								<option value="15">15:00</option>
-								<option value="16">16:00</option>
-								<option value="17">17:00</option>
-								<option value="18">18:00</option>
-							</select><br>
 
-              <input class="content" type="button" value="예약">
+							</select>
+							<br>
+
+              <input class="content" type="submit" value="예약">
 
               </form>
 
