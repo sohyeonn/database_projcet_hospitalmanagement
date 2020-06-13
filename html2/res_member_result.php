@@ -12,6 +12,6 @@
 		$sql1 = "insert into 환자 values (0, '$name', $id_num, '$phone', null, null, null, null, null, null, null, null)";
 		$result1 = mysqli_query($mysqli,$sql1);
 
-		echo "<script>location.href='res_department.html'</script>";
+		echo "<script>location.href='res_department.html?name=$name'</script>";
 
 ?>
