@@ -1,4 +1,4 @@
-//2020.06.01 18013175 김효진
+//2020.06.14 18013175 김효진
 $('.content').click(function(){
   $('#years').change(function(e) {
     console.log( $('#years option:selected').val());
