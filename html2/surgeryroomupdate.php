@@ -1,6 +1,6 @@
-<!--2020.06.09 16011164 윤소현-->
+<!--2020.06.14 16011164 윤소현-->
 <!-- 해야할 것
-1. db값과 같을 때 에러메세지 띄우기
+1. db값과 같을 때 에러메세지 띄우기 ok
 -->
 <?php
 
@@ -39,49 +39,84 @@
       echo "<script> location.href='./수술실관리.php'; </script>";
     }
 
-    //환자가 이미 수술하고 있는경우
-    $test3 = "SELECT count(a.이름) t3 from 환자 as a right outer join 수술중 as b on a.환자번호=b.patid where a.이름='$pname'";
-    select * from 환자 as a left outer join 의사 as b on a.담당교수=(select 의사번호 from 의사 where b.의사이름='이흉부');???
+    //의사 없는 경우
+    $test3 = "SELECT count(*) t3 FROM 의사 WHERE 의사이름 = '$dname'";
     $testq3 = mysqli_query($conn, $test3);
+    //echo $test2;
     $testrow3 = mysqli_fetch_array($testq3);
-    if($testrow3['t3']==true){
-      echo '<script> alert("해당 환자는 이미 수술중입니다!");</script>';
+    if($testrow3['t3']==false){
+      echo '<script> alert("해당 의사가 없습니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
     }
-
-    //의사가 이미 수술하고 있는경우
-    $test4 = "SELECT count(*) t4 from 의사 WHERE 의사번호='$dname' AND ";
+  
+   //환자가 이미 수술하고 있는경우 - 동일인물때문에안됨
+    /*$test4 = "SELECT count(a.이름) t4 from 환자 as a right outer join 수술중 as b on a.환자번호=b.patid where a.이름='$pname' AND ";
     $testq4 = mysqli_query($conn, $test4);
     $testrow4 = mysqli_fetch_array($testq4);
-    if($testrow4['t4']==false){
+    if($testrow3['t4']==true){
+      echo '<script> alert("해당 환자는 이미 수술중입니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }*/
+
+    //의사가 이미 수술하고 있는경우
+    $test4 = "SELECT count(*) t4 from 수술중 WHERE docid=(SELECT 의사번호 from 의사 where 의사이름='$dname')";
+    $testq4 = mysqli_query($conn, $test4);
+    $testrow4 = mysqli_fetch_array($testq4);
+    if($testrow4['t4']==true){
       echo '<script> alert("해당 의사는 이미 수술중입니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
     }
 
     //환자와 의사가 안맞는경우
-    $test5 = "SELECT count(*) t5 from 환자 WHERE 이름='$pname' AND ";
-    $testq4 = mysqli_query($conn, $test5);
+    $test5 = "SELECT count(*) t5 from 환자 WHERE 이름='$pname' AND 담당교수=(SELECT 의사번호 from 의사 where 의사이름='$dname')";
+    $testq5 = mysqli_query($conn, $test5);
     $testrow5 = mysqli_fetch_array($testq5);
     if($testrow5['t5']==false){
-      echo '<script> alert("해당 환자는 이미 수술중입니다!");</script>';
+      echo '<script> alert("환자와 담당의사가 일치하지 않습니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
     }
 
     //장기이식 옵션 두개 다 선택이 안된경우
+    if(($on == 0 && $org == 'on') || ($on == true && $org == NULL)){
+      echo '<script> alert("장기를 이식받을 신체를 선택하고 장기이식수술을 체크해주세요!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
 
-
+    //환자가 장기이식 환자가 아닌경우
+    if($org == 'on' && $on == true){
+      $test6 = "SELECT count(*) t6 from 환자 WHERE 이름='$pname' AND 장기이식필요유무='Y'";
+      $testq6 = mysqli_query($conn, $test6);
+      $testrow6 = mysqli_fetch_array($testq6);
+      if($testrow6['t6']==false){
+        echo '<script> alert("해당 환자는 장기이식 환자가 아닙니다!");</script>';
+        echo "<script> location.href='./수술실관리.php'; </script>";
+      }
+    }
+   
   }
   else{
     //out할 수술방이 없는 경우
-  }
+    $test7 = "SELECT count(*) t7 from 수술중 WHERE 수술방=$rs";
+    $testq7 = mysqli_query($conn, $test7);
+    $testrow7 = mysqli_fetch_array($testq7);
+    if($testrow7['t7']==false){
+      echo '<script> alert("현재 해당 수술방은 비어있습니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
 
+    //out할 수술방에 환자와 의사가 안맞는 경우
+    $test8 = "SELECT count(*) t8 from 수술중 WHERE patid=(SELECT 환자번호 from 환자 where 이름='$pname') 
+    AND docid=(SELECT 의사번호 from 의사 where 의사이름='$dname')";
+    $testq8 = mysqli_query($conn, $test8);
+    $testrow8 = mysqli_fetch_array($testq8);
+    if($testrow8['t8']==false){
+      echo '<script> alert("해당 수술방의 환자와 의사를 한번 더 확인해주세요!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+    }
     
+  }
   
-  
-  
-  
-  
-  /*if ($eme == NULL){$eme = 0;}
+  if ($eme == NULL){$eme = 0;}
   else {$eme = 1;}
   if ($ane == NULL){$ane = 0;}
   else {$ane = 1;}

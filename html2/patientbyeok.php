@@ -2,7 +2,7 @@
 <?php
 
   include './dbconn.php';
-  $pid = $_GET["patnum"]; //main2.php 19번줄
+  $pid = $_GET["patnum"]; 
   
   //echo $pid;
   $query1 = "SELECT * FROM 환자 WHERE 환자번호 = $pid";
