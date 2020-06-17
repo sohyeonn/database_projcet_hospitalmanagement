@@ -57,7 +57,7 @@
 							<ul>
 								<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a>
 								<ul>
-									<li><a href="doctor.html">의료진 조회</a></li>
+									<li><a href="doctor_search.html">의료진 조회</a></li>
 								</ul>
 							</li>
 
