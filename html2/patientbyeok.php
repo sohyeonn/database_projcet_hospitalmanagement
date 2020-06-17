@@ -8,8 +8,8 @@
   $query1 = "SELECT * FROM 환자 WHERE 환자번호 = $pid";
   //echo $query1;
   $r1 = mysqli_query($conn, $query1);
-
   $row1 = mysqli_fetch_array($r1);
+  
   $query2 = "INSERT INTO 이전환자기록(이름, 주민번호, 연락처, 병명, 담당교수, 치료날짜, 수술여부, 호실, 비용, 장기이식필요유무, 특이사항) 
   VALUES ('$row1[이름]', $row1[주민번호], '$row1[연락처]', '$row1[병명]', $row1[담당교수], '$row1[치료날짜]', '$row1[수술여부]', $row1[호실], 
   $row1[비용], '$row1[장기이식필요유무]', '$row1[특이사항]')";

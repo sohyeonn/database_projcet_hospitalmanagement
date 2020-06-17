@@ -1,7 +1,7 @@
 <!--2020.06.10 김효진-->
 <html>
     <head>
-        <title>Strongly Typed by HTML5 UP</title>
+        <title>의료진조회</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="assets/css/main.css" />
@@ -78,19 +78,15 @@
                 <header>
                   <h2><strong>Doctor Search</strong></h2>
                   <?php
-                      $host = 'localhost';
-                      $user = 'root';
-                      $pw = '0000';
-                      $dbName = 'project';
-                      $mysqli = new mysqli($host, $user, $pw, $dbName);
+                       include './dbconn.php';
 
                       $search=$_GET['search'];
 
-                      $sql = "select * from 의사 where 의사이름 = '$search'";
-                      $result = mysqli_query($mysqli,$sql);
+                      $sql = "select * from 의사 where 의사이름 LIKE '%$search%'";
+                      $result = mysqli_query($conn,$sql);
 
                       while ($row =mysqli_fetch_array($result)){
-                        echo '이름 : '.$row['의사이름'].'   ';
+                        echo '이름 : '.$row['의사이름'].'   &nbsp&nbsp&nbsp&nbsp';
                         if($row['소속과']==1)
                           echo  '소속과 : 외과    '.'   ';
                          else  if($row['소속과']==2)
@@ -113,7 +109,7 @@
                             echo '소속과 : 소아과'.'   ';
                           else  if($row['소속과']==11)
                             echo '소속과 : 응급의학과';
-                        echo '직급 : '.$row['직급'].'    '.'   ';
+                        echo '&nbsp&nbsp&nbsp&nbsp직급 : '.$row['직급'].'    '.'   ';
                         echo '<br>';
                     }
                   ?>

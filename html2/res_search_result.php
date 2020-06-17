@@ -78,17 +78,11 @@
                 <header>
                   <h2><strong>Reservation Search</strong></h2>
                   <?php
-                      $host = 'localhost';
-                      $user = 'root';
-                      $pw = '0000';
-                      $dbName = 'project';
-                      $mysqli = new mysqli($host, $user, $pw, $dbName);
-
+                      include './dbconn.php';
                       $search=$_GET['search'];
 
                       $sql = "select * from 환자 where 환자번호 = '$search'";
-                      $result = mysqli_query($mysqli,$sql);
-
+                      $result = mysqli_query($conn,$sql);
                       while ($row =mysqli_fetch_array($result)){
                         echo '이름 : '.$row['이름'].'   ';
                         echo '병명 : '.$row['병명'].'    ';

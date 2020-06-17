@@ -1,4 +1,4 @@
-<!--2020.06.14 16011164 윤소현-->
+<!--2020.06.17 16011164 윤소현-->
 <!-- 해야할 것
 1. db값과 같을 때 에러메세지 띄우기 ok
 -->
@@ -27,6 +27,7 @@
     if($testrow1['t1']>0){
       echo '<script> alert("이미 수술실이 사용중입니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+    exit;
     }
 
     //환자 없는 경우
@@ -37,6 +38,7 @@
     if($testrow2['t2']==false){
       echo '<script> alert("해당 환자가 없습니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
 
     //의사 없는 경우
@@ -47,8 +49,19 @@
     if($testrow3['t3']==false){
       echo '<script> alert("해당 의사가 없습니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
   
+    //환자 수술여부 X
+    $test9 = "SELECT count(*) t9 FROM 환자 WHERE 이름 = '$dname' AND 수술여부 = 'N'";
+    $testq9 = mysqli_query($conn, $test9);
+    //echo $test2;
+    $testrow9 = mysqli_fetch_array($testq9);
+    if($testrow9['t9']==false){
+      echo '<script> alert("해당 환자는 수술하지 않는 환자입니다!");</script>';
+      echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
+
    //환자가 이미 수술하고 있는경우 - 동일인물때문에안됨
     /*$test4 = "SELECT count(a.이름) t4 from 환자 as a right outer join 수술중 as b on a.환자번호=b.patid where a.이름='$pname' AND ";
     $testq4 = mysqli_query($conn, $test4);
@@ -65,6 +78,7 @@
     if($testrow4['t4']==true){
       echo '<script> alert("해당 의사는 이미 수술중입니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
 
     //환자와 의사가 안맞는경우
@@ -74,12 +88,14 @@
     if($testrow5['t5']==false){
       echo '<script> alert("환자와 담당의사가 일치하지 않습니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
 
     //장기이식 옵션 두개 다 선택이 안된경우
     if(($on == 0 && $org == 'on') || ($on == true && $org == NULL)){
       echo '<script> alert("장기를 이식받을 신체를 선택하고 장기이식수술을 체크해주세요!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
 
     //환자가 장기이식 환자가 아닌경우
@@ -90,6 +106,7 @@
       if($testrow6['t6']==false){
         echo '<script> alert("해당 환자는 장기이식 환자가 아닙니다!");</script>';
         echo "<script> location.href='./수술실관리.php'; </script>";
+        exit;
       }
     }
    
@@ -102,6 +119,7 @@
     if($testrow7['t7']==false){
       echo '<script> alert("현재 해당 수술방은 비어있습니다!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
 
     //out할 수술방에 환자와 의사가 안맞는 경우
@@ -112,6 +130,7 @@
     if($testrow8['t8']==false){
       echo '<script> alert("해당 수술방의 환자와 의사를 한번 더 확인해주세요!");</script>';
       echo "<script> location.href='./수술실관리.php'; </script>";
+      exit;
     }
     
   }
@@ -143,14 +162,13 @@
 
   if($bs == 'in'){
     $query1 = "UPDATE 수술방 SET 빈방여부='N', 환자=$row1[환자번호], 담당의사=$row2[의사번호] WHERE 호실=$rs";
-    $query2 = "INSERT INTO 수술중 VALUES(NULL, $row1[환자번호], $row2[의사번호], $rs, $eme, $ane, $hos, $chi, $old, $org, $vip)";
+    $query2 = "INSERT INTO 수술중 VALUES(NULL, $row1[환자번호], $row2[의사번호], $rs, $eme, $ane, $hos, $chi, $old, $on, $vip)";
     if($org != NULL & $on != 0){
       $query3 = "UPDATE 장기기증 SET num=num-1 WHERE id=$on";
       $result3 = mysqli_query($conn, $query3);
     }
     $result1 = mysqli_query($conn, $query1);
     $result2 = mysqli_query($conn, $query2);
-    $result3 = mysqli_query($conn, $query3);
     echo " <script> location.href='./수술실관리.php'; </script>";
   }
   else {

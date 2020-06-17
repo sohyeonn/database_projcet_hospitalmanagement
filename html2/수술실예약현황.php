@@ -1,11 +1,12 @@
-<!--2020.05.29 16011164 윤소현-->
+<!--2020.06.17 16011164 윤소현-->
 <?php
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "SELECT a.호실, b.이름, c.의사이름 from 수술방 as a LEFT OUTER JOIN 환자 as b ON a.환자=b.환자번호 LEFT OUTER JOIN 의사 
-  as c ON a.담당의사=c.의사번호 WHERE a.빈방여부='N';";
-  
+  $query = "SELECT a.*, b.이름, b.호실, c.의사이름 from 수술중 as a LEFT OUTER JOIN 환자 as b ON a.patid=b.환자번호 LEFT OUTER JOIN 
+  의사 as c ON a.docid=c.의사번호;";
+//"SELECT a.*, b.이름, b.호실, c.의사이름 d.name from 수술중 as a LEFT OUTER JOIN 환자 as b ON a.patid=b.환자번호 LEFT OUTER JOIN 
+//의사 as c ON a.docid=c.의사번호 LEFT OUTER JOIN 장기기증 as d ON a.장기이식=d.id;";
   $result = mysqli_query($conn, $query);
 
 
@@ -108,9 +109,35 @@
 								<?php
 									while ($row = mysqli_fetch_array($result)){
 										echo "<tr>	
-											<td>$row[호실] 호실에서 </td>		
-											<td>$row[의사이름] 의사선생님이 </td>			
-                                            <td>환자 $row[이름] 님을 수술중입니다.</td><br>                                           
+											<td>$row[수술방] 호실에서 &nbsp</td>		
+											<td>$row[의사이름] 의사선생님이 &nbsp</td>			
+											<td>환자 $row[이름] 님을 수술중&nbsp&nbsp</td>";
+											if($row['응급'] == true){
+												echo "<td>응급&nbsp&nbsp</td>";
+											}
+											if($row['마취'] == true){
+												echo "<td>마취중&nbsp&nbsp</td>";
+											}
+											if($row['입원'] == true){
+												echo "<td>$row[호실] 병실&nbsp&nbsp</td>";
+											}
+											if($row['어린이'] == true){
+												echo "<td>어린이&nbsp&nbsp</td>";
+											}
+											if($row['노인'] == true){
+												echo "<td>노인&nbsp&nbsp</td>";
+											}
+											if($row['장기이식'] == true){
+												$query1 = "SELECT * from 장기기증 where id=$row[장기이식]";
+												$result1 = mysqli_query($conn, $query1);
+												$row1 = mysqli_fetch_array($result1);
+												echo $row1['name'];
+												echo "<td>장기이식수술&nbsp&nbsp</td>";
+											}
+											if($row['VIP'] == true){
+												echo "<td>VIP&nbsp&nbsp</td>";
+											}
+											echo"환자입니다.<br>                                           
 										</tr>";
 										}
 								?>  
