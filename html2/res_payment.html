@@ -1,7 +1,7 @@
-<!--2020.06.10 김효진-->
+<!--2020.06.17 김효진-->
 <html>
 <head>
-		<title>Strongly Typed by HTML5 UP</title>
+		<title>세종 병원</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -73,15 +73,13 @@
 								</ul>
 							</nav>
 				</section>
-
-
-
 				<section id="features">
 					<div class="container">
 						<header>
 							<form name="payment" method="get">
 								<button id="payment" type="button">결제하기</button>
-								<script>
+								<script type="text/javascript">
+
 								    $("#payment").click(function () {
 								        var IMP = window.IMP; // 생략가능
 								        IMP.init('imp33578611');
@@ -93,16 +91,9 @@
 
 								            merchant_uid: 'merchant_' + new Date().getTime(),
 
-								            name: '주문명:결제테스트',
+								            name: '병원비',
 
-								            amount: 1000,
-
-								            buyer_email: 'iamport@siot.do',
-								            buyer_name: '구매자이름',
-								            buyer_tel: '010-1234-5678',
-								            buyer_addr: '서울특별시 강남구 삼성동',
-								            buyer_postcode: '123-456',
-								            m_redirect_url: 'https://www.yourdomain.com/payments/complete'
+								            amount: Math.floor(Math.random() * 100000)
 
 								        }, function (rsp) {
 								            console.log(rsp);

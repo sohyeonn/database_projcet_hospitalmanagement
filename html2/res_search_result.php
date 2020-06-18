@@ -1,7 +1,7 @@
 <!--2020.06.09 김효진-->
 <html>
     <head>
-        <title>Strongly Typed by HTML5 UP</title>
+        <title>세종병원</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="assets/css/main.css" />
@@ -31,7 +31,7 @@
     									<li><a href="#">예약 관리</a>
     									<ul>
     										<li><a href="res_member.html">예약하기</a></li>
-    										<li><a href="searching.html">예약 조회</a></li>
+    										<li><a href="res_search.html">예약 조회</a></li>
     									</ul>
     								</li>
     									</ul>
@@ -78,14 +78,15 @@
                 <header>
                   <h2><strong>Reservation Search</strong></h2>
                   <?php
-                      include './dbconn.php';
+                  include './dbconn.php';
                       $search=$_GET['search'];
 
                       $sql = "select * from 환자 where 환자번호 = '$search'";
                       $result = mysqli_query($conn,$sql);
+                      
                       while ($row =mysqli_fetch_array($result)){
-                        echo '이름 : '.$row['이름'].'   ';
-                        echo '병명 : '.$row['병명'].'    ';
+                        echo '이름 : '.$row['이름'].'   &nbsp&nbsp&nbsp&nbsp';
+                        echo '병명 : '.$row['병명'].'    &nbsp&nbsp&nbsp&nbsp';
                         if($row['담당교수']==1)
                           echo '담당의사 : 김외과    '.'   ';
                         else if($row['담당교수']==2)
@@ -175,7 +176,13 @@
                         else if($row['담당교수']==44)
                           echo '담당의사 : 진응급    '.'   ';
 
-                        echo '치료날짜 : '.$row['치료날짜'].'    ';
+                        echo '&nbsp&nbsp&nbsp&nbsp치료날짜 : '.$row['치료날짜'].'    ';
+                        echo '&nbsp&nbsp&nbsp&nbsp수술여부 : '.$row['수술여부'].'    ';
+                        echo '&nbsp&nbsp&nbsp&nbsp입원실 : '.$row['호실'].'    ';
+                        echo '&nbsp&nbsp&nbsp&nbsp비용 : '.$row['비용'].'    ';
+                        echo '&nbsp&nbsp&nbsp&nbsp장기이식 : '.$row['장기이식필요여부'].'    ';
+                        echo '&nbsp&nbsp&nbsp&nbsp특이사항 : '.$row['특이사항'].'    ';
+
                         echo '<br>';
                     }
                   ?>
