@@ -1,11 +1,11 @@
-<!--2020.06.12 16011164 윤소현-->
+<!--2020.06.19 16011164 윤소현-->
 <?php
   include './dbconn.php';
   //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "SELECT a.환자번호, a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 이전환자기록 
-  as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호 ORDER BY 환자번호 DESC;";
-  
+  $query = "SELECT * FROM old_patient ORDER BY 환자번호 DESC;";
+  //VIEW old_patient: SELECT a.환자번호, a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 
+  // -> from 이전환자기록 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호;
   $result = mysqli_query($conn, $query);
   
 
@@ -73,7 +73,7 @@
 													<li><a href="이전환자관리.php">이전환자</a></li>
 												</ul>
 											</li>
-											<li><a href="환자완료.php">환자퇴원</a></li>
+											<li><a href="환자검색및완료.php">환자검색&퇴원</a></li>
 										</ul>
 									</li>
 									<li><a class="icon solid fa-cog" href="#"><span>

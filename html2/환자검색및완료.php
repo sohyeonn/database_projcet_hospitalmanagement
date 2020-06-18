@@ -1,11 +1,10 @@
-<!--2020.06.12 16011164 윤소현-->
+<!--2020.06.19 16011164 윤소현-->
 <?php
   include './dbconn.php';
   $pid = $_GET["patnum"]; //main2.php 19번줄
   
-  $query = "SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, 
-            a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호 where a.환자번호='$pid';";
-  
+  $query = "SELECT * FROM search_patient where a.환자번호='$pid';";
+  //search_patient VIEW = SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호
   $result = mysqli_query($conn, $query);
 
   $query1 = "SELECT 의사번호 FROM 의사 WHERE 의사이름 = '$dc'";
@@ -19,7 +18,7 @@
 -->
 <html>
 	<head>
-		<title>환자퇴원</title>
+		<title>환자검색</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -32,7 +31,7 @@
 					<div class="container">
 
 						<!-- Logo -->
-							<h1 id="logo">환자 퇴원</h1>
+							<h1 id="logo">환자 검색</h1>
 
 						<!-- Nav -->
 						<nav id="nav">
@@ -74,7 +73,7 @@
 													<li><a href="이전환자관리.php">이전환자</a></li>
 												</ul>
 											</li>
-											<li><a href="환자완료.php">환자퇴원</a></li>
+											<li><a href="환자검색및완료.php">환자검색&퇴원</a></li>
 										</ul>
 									</li>
 									<li><a class="icon solid fa-cog" href="#"><span>
