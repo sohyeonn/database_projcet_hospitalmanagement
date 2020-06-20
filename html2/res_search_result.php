@@ -92,7 +92,10 @@
 
                       while ($row =mysqli_fetch_array($result)){
                         echo '이름 : '.$row['이름'].'   &nbsp&nbsp&nbsp&nbsp';
-                        echo '병명 : '.$row['병명'].'    &nbsp&nbsp&nbsp&nbsp';
+                        if($row['병명'] == null)
+                          echo '&nbsp&nbsp&nbsp&nbsp병명여부 : N&nbsp&nbsp&nbsp&nbsp';
+                        else
+                          echo '병명 : '.$row['병명'].'    &nbsp&nbsp&nbsp&nbsp';
                         if($row['담당교수']==1)
                           echo '담당의사 : 김외과    '.'   ';
                         else if($row['담당교수']==2)
