@@ -57,7 +57,7 @@
 													<li><a href="이전환자관리.php">이전환자</a></li>
 												</ul>
 											</li>
-											<li><a href="환자검색및완료.php">환자검색&퇴원</a></li>
+											<li><a href="환자완료.php">환자퇴원</a></li>
 										</ul>
 									</li>
 									<li><a class="icon solid fa-cog" href="#"><span>
@@ -89,13 +89,14 @@
 								$mysqli = new mysqli($host, $user, $pw, $dbName);
 
 								$depart =$_GET['depart'];
+
 								$sql= "select * from 의사 where 소속과='$depart'and 직급 not in ('레지던트','인턴')";
 								$result = mysqli_query($mysqli,$sql);
 
-
 								while ($row = mysqli_fetch_array($result)){
-									echo '<input type="radio" name="doctor" value="'.$depart.'"/>';
-									echo '이름 : '.$row['의사이름']. ' 	  ';
+									echo '<input type="radio" name="doctor" value="'.$row['의사번호'].'"/>';
+									echo '의사번호 : '.$row['의사번호']. ' 	   &nbsp&nbsp&nbsp&nbsp';
+									echo '이름 : '.$row['의사이름']. ' 	   &nbsp&nbsp&nbsp&nbsp';
 									if($row['소속과']==1)
 										echo  '소속과 : 외과    '.'   ';
 									 else  if($row['소속과']==2)
@@ -118,11 +119,11 @@
 											echo '소속과 : 소아과'.'   ';
 										else  if($row['소속과']==11)
 											echo '소속과 : 응급의학과';
- 									echo '직급 : '.$row['직급']. '  		  ';
+ 									echo ' &nbsp&nbsp&nbsp&nbsp직급 : '.$row['직급']. '  		  ';
  									echo '<br>';
  								}
  								 ?>
-              <input class="content" type="submit" value="선택">
+              <input class="content" type="button" value="선택">
 
 							</form>
 						</header>
