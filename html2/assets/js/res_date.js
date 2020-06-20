@@ -1,5 +1,7 @@
-//2020.06.14 18013175 김효진
+//2020.06.01 18013175 김효진
 $('.content').click(function(){
+    var num=getParameter("num", false)
+
   $('#years').change(function(e) {
     console.log( $('#years option:selected').val());
     var year = $('#years option:selected').val();
@@ -13,23 +15,32 @@ $('.content').click(function(){
           console.log( $('#choiceTime option:selected').val());
           var time = $('#choiceTime option:selected').val();
 
-        var date = new Date(year,month,day,time,0,0);
+          var date = new Date(year,month,day,time);
 
-        $.ajax({
-              type:"GET",
-              url:".res_date_result.php",
-              data : {date},
-              dataType : "HTML",
-              success: function(HTML){
-                  console.log(HTML);
-              },
-              error: function(xhr, status, error) {
-                  alert(error);
-              }
-          });
-
+          $.ajax({
+            url				: './res_date_result.php?num='+num+'&date='+date,
+            data			: {"num": num, "date": date},
+            type			: 'GET',
+            success		: function(data){
+              //alert(data);
+              location.href='res_date_result.php?num='+num+'&date='+date
+            },
+            error 		: function(xhr,status,error){
+              alert(error);
+            },
+          })
         });
       });
     });
-  });
+  }
+);
 });
+function getParameter(name, url) {
+  if(!url) url = window.location.href;
+
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+  results = regex.exec(url);
+
+  return results[2];
+}
