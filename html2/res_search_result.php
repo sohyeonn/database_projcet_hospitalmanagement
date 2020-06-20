@@ -56,7 +56,7 @@
     													<li><a href="이전환자관리.php">이전환자</a></li>
     												</ul>
     											</li>
-    											<li><a href="환자검색및완료.php">환자검색&퇴원</a></li>
+    											<li><a href="환자완료.php">환자퇴원</a></li>
     										</ul>
     									</li>
     									<li><a class="icon solid fa-cog" href="#"><span>
@@ -78,12 +78,18 @@
                 <header>
                   <h2><strong>Reservation Search</strong></h2>
                   <?php
-                  include './dbconn.php';
+
+                      $host = 'localhost';
+                  		$user = 'root';
+                  		$pw = '0000';
+                  		$dbName = 'project';
+                  		$mysqli = new mysqli($host, $user, $pw, $dbName);
+
                       $search=$_GET['search'];
 
                       $sql = "select * from 환자 where 환자번호 = '$search'";
-                      $result = mysqli_query($conn,$sql);
-                      
+                      $result = mysqli_query($mysqli,$sql);
+
                       while ($row =mysqli_fetch_array($result)){
                         echo '이름 : '.$row['이름'].'   &nbsp&nbsp&nbsp&nbsp';
                         echo '병명 : '.$row['병명'].'    &nbsp&nbsp&nbsp&nbsp';
@@ -177,11 +183,24 @@
                           echo '담당의사 : 진응급    '.'   ';
 
                         echo '&nbsp&nbsp&nbsp&nbsp치료날짜 : '.$row['치료날짜'].'    ';
-                        echo '&nbsp&nbsp&nbsp&nbsp수술여부 : '.$row['수술여부'].'    ';
-                        echo '&nbsp&nbsp&nbsp&nbsp입원실 : '.$row['호실'].'    ';
+                        if($row['수술여부'] == null)
+                          echo '&nbsp&nbsp&nbsp&nbsp수술여부 : N';
+                        else
+                          echo '&nbsp&nbsp&nbsp&nbsp수술여부 : Y';
+                        if($row['호실'] == null)
+                          echo '&nbsp&nbsp&nbsp&nbsp입원 : N';
+                        else
+                          echo '&nbsp&nbsp&nbsp&nbsp입원실 : '.$row['호실'].'    ';
                         echo '&nbsp&nbsp&nbsp&nbsp비용 : '.$row['비용'].'    ';
-                        echo '&nbsp&nbsp&nbsp&nbsp장기이식 : '.$row['장기이식필요여부'].'    ';
-                        echo '&nbsp&nbsp&nbsp&nbsp특이사항 : '.$row['특이사항'].'    ';
+                        if($row['장기이식여부'] == null)
+                          echo '&nbsp&nbsp&nbsp&nbsp장기이식여부 : N';
+                        else
+                          echo '&nbsp&nbsp&nbsp&nbsp장기이식여부 : Y';
+
+                        if($row['특이사항'] == null)
+                            echo '&nbsp&nbsp&nbsp&nbsp특이사항 : N';
+                        else
+                            echo '&nbsp&nbsp&nbsp&nbsp특이사항 : Y';
 
                         echo '<br>';
                     }
