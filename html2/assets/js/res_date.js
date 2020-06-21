@@ -15,15 +15,15 @@ $('.content').click(function(){
           console.log( $('#choiceTime option:selected').val());
           var time = $('#choiceTime option:selected').val();
 
-          var date = new Date(year,month,day,time);
+          var dateStr = year+"-"+month+"-"+day+" "+time+":00";
 
           $.ajax({
-            url				: './res_date_result.php?num='+num+'&date='+date,
-            data			: {"num": num, "date": date},
+            url				: './res_date_result.php?num='+num+'&date='+dateStr,
+            data			: {"num": num, "date": dateStr},
             type			: 'GET',
             success		: function(data){
               //alert(data);
-              location.href='res_date_result.php?num='+num+'&date='+date
+              location.href='res_date_result.php?num='+num+'&date='+dateStr
             },
             error 		: function(xhr,status,error){
               alert(error);
