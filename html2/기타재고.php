@@ -4,26 +4,28 @@
   //$cid = $_GET['id']; //main2.php 19번줄
 
   $query = "SELECT * from 기타재고";
+  //기타재고 값 뿌려주기 위해 모두 선택
   $result = mysqli_query($conn, $query);
 
   $query1 = "UPDATE etctest SET cnt=cnt-1";
+  //화면이 새로고침될 때 마다 etctest 값 1개 감소
   $result1 = mysqli_query($conn, $query1);
 
   $query2 = "SELECT * from etctest";
   $result2 = mysqli_query($conn, $query2);
   $r2 = mysqli_fetch_array($result2);
-  if($r2['cnt'] < 0){
+  if($r2['cnt'] < 0){ //etctest값이 10개 감소하면 기타재고 1개 감소 후 etctest는 10개로 업데이트
 	$query3 = "UPDATE 기타재고 SET num=num-1";
 	$result3 = mysqli_query($conn, $query3);
 	$query4 = "UPDATE etctest SET cnt=cnt+10";
  	 $result4 = mysqli_query($conn, $query4);  
   }
 
-  $query5 = "SELECT count(*) cntt FROM 기타재고 WHERE num<10";
+  $query5 = "SELECT count(*) cntt FROM 기타재고 WHERE num<10"; //기타재고에서 10개가 넘지않는 재고 count
   $result5 = mysqli_query($conn, $query5);
   $row5 = mysqli_fetch_array($result5);
-  if($row5['cntt']>0){
-	  $query6 = "UPDATE 기타재고 SET outofstock='Y' WHERE num<10";
+  if($row5['cntt']>0){//위에서 count한게 1개라도 있으면 재고부족(outofstock) Y로 변경 후 재고부족 alert문 띄어주기
+	  $query6 = "UPDATE 기타재고 SET outofstock='Y' WHERE num<11";
 	  $result6 = mysqli_query($conn, $query6);
 	  echo "<script>alert('재고 부족!');</script>";
   }
@@ -124,7 +126,7 @@
 												<table id="myTable" width="800" border="1">
 													<tr>
 														<th>이름</th>
-														<th>갯수</th>
+														<th>개수</th>
 														<th>추가주문필요</th>
 														<th>추가주문하기</th>
 													</tr>

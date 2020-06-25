@@ -101,7 +101,7 @@
 												<table id="myTable" width="800" border="1">
 													<tr>
 														<th>이름</th>
-														<th>갯수</th>
+														<th>개수</th>
 														<th>추가주문필요</th>
 														<th>추가주문하기</th>
 													</tr>

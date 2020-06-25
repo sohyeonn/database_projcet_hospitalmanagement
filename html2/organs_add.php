@@ -113,7 +113,7 @@
 											<option value="14">다리</option>
 											
 										</select>
-										<input type="text" name = "orgnum" placeholder="추가할 갯수를 입력하세요"><br>
+										<input type="text" name = "orgnum" placeholder="추가할 개수를 입력하세요"><br>
 										<input type="submit">
 									</form>
 								</article>

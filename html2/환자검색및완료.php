@@ -1,15 +1,5 @@
 <!--2020.06.19 16011164 윤소현-->
-<?php
-  include './dbconn.php';
-  $pid = $_GET["patnum"]; //main2.php 19번줄
-  
-  $query = "SELECT * FROM search_patient where a.환자번호='$pid';";
-  //search_patient VIEW = SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호
-  $result = mysqli_query($conn, $query);
 
-  $query1 = "SELECT 의사번호 FROM 의사 WHERE 의사이름 = '$dc'";
-  $r1 = mysqli_query($conn, $query1);
-?>
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -98,7 +88,7 @@
 								<article class="box post">
 									<center>
 										<form action="patientbye.php">
-											<input type=text style="text-align:center; width:500px; height:50px;" name="patientbye" placeholder="환자 이름 or 환자 번호 or 병명 or 호실 을 입력하세요"><br>
+											<input type=text style="text-align:center; width:500px; height:50px;" name="patientbye" placeholder="환자 이름 or 병명 or 호실 을 입력하세요"><br>
 											<input type="submit">
 										</form>
 									</center>

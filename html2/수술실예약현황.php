@@ -1,12 +1,12 @@
 <!--2020.06.17 16011164 윤소현-->
 <?php
   include './dbconn.php';
-  //$cid = $_GET['id']; //main2.php 19번줄
 
-  $query = "SELECT a.*, b.이름, b.호실, c.의사이름 from 수술중 as a LEFT OUTER JOIN 환자 as b ON a.patid=b.환자번호 LEFT OUTER JOIN 
-  의사 as c ON a.docid=c.의사번호;";
-//"SELECT a.*, b.이름, b.호실, c.의사이름 d.name from 수술중 as a LEFT OUTER JOIN 환자 as b ON a.patid=b.환자번호 LEFT OUTER JOIN 
-//의사 as c ON a.docid=c.의사번호 LEFT OUTER JOIN 장기기증 as d ON a.장기이식=d.id;";
+  $query = "SELECT a.*, b.이름, b.호실, c.의사이름 from 수술중 as a LEFT OUTER JOIN 
+  환자 as b ON a.patid=b.환자번호 LEFT OUTER JOIN 의사 as c ON a.docid=c.의사번호;";
+  //수술중인 환자의 정보를 보여주기 위해 수술중 테이블의 전부와
+  //환자와 의사 정보가 번호로 되어있기 때문에 이름을 가져오기 위해
+  //환자테이블과 의사테이블을 수술중 테이블에 left outer join
   $result = mysqli_query($conn, $query);
 
 
@@ -113,7 +113,7 @@
 											<td>$row[의사이름] 의사선생님이 &nbsp</td>			
 											<td>환자 $row[이름] 님을 수술중&nbsp&nbsp</td>";
 											if($row['응급'] == true){
-												echo "<td>응급&nbsp&nbsp</td>";
+												echo "<td>응급환자&nbsp&nbsp</td>";
 											}
 											if($row['마취'] == true){
 												echo "<td>마취중&nbsp&nbsp</td>";

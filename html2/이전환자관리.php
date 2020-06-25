@@ -4,8 +4,10 @@
   //$cid = $_GET['id']; //main2.php 19번줄
 
   $query = "SELECT * FROM old_patient ORDER BY 환자번호 DESC;";
-  //VIEW old_patient: SELECT a.환자번호, a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 
-  // -> from 이전환자기록 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호;
+  //VIEW old_patient: SELECT a.환자번호, a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실,  
+  //a.비용, a.장기이식필요유무, a.특이사항 from 이전환자기록 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호;
+  //이전환자기록 주민번호를 제외한(개인정보보호이유) 정보 보여주기
+  //담당교수이름을 보여주기 위해 left outer join으로 연결
   $result = mysqli_query($conn, $query);
   
 

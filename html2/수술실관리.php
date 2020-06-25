@@ -1,19 +1,14 @@
 <!--2020.06.03 16011164 윤소현-->
-<!--
-	해야될것
-	1. 환자와 담당의사가 매치되지 않을때 에러 발생
-	2. 환자 번호와 의사 번호가 아닌 이름으로
--->
+
 <?php
   include './dbconn.php';
-  //$cid = $_GET['id']; //main2.php 19번줄
 
   $query1 = "select * from 수술방 where 빈방여부='Y'";
-  
+  //수술방 테이블에서 빈방인 곳만 select
   $result1 = mysqli_query($conn, $query1);
 
   $query2 = "select * from 수술방 where 빈방여부='N'";
-  
+  //수술방 테이블에서 빈방이 아닌 곳만 select
   $result2 = mysqli_query($conn, $query2);
 
 ?>

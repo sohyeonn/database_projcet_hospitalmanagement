@@ -3,12 +3,14 @@
   include './dbconn.php';
   $pbye = $_GET["patientbye"];
 
-  $query = "SELECT a.환자번호, a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 환자 
-  as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호 WHERE a.이름 LIKE '%$pbye%' OR a.환자번호 LIKE '%$pbye%' OR a.병명 LIKE '%$pbye%' 
-  OR a.호실 LIKE '%$pbye%';";
-  
+  $query = "SELECT * FROM search_patient WHERE 이름 LIKE '%$pbye%' OR 병명 LIKE '%$pbye%' OR 호실 LIKE '%$pbye%';";
+  //환자 검색 쿼리 search_patient view에서
+  //이름이나 환자번호나 병명이나 호실에 검색한게 들어가면 모두 출력
   $result = mysqli_query($conn, $query);
-  
+
+  //search_patient VIEW = SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, 
+  //a.특이사항 from 환자 as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호;
+  //환자 테이블에서 주민번호를 제외한 정보를 가져오고 의사 이름을 출력해야 하기 때문에 환자 테이블에 의사 테이블을 left outer join
 
 ?>
 <!DOCTYPE HTML>
@@ -104,7 +106,6 @@
 										<form name="frm_content" action="patientbyeok.php" method="GET">			
 											<table id="myTable" width="800" border="1">
 												<tr>
-													<th>환자번호</th>
 													<th>이름</th>
 													<th>연락처</th>
 													<th>병명</th>
@@ -121,8 +122,7 @@
 												<?php
 												while ($row = mysqli_fetch_array($result)){?>
 													<form name="frm_contentt" action="patientbyeok.php" method="GET"><?		
-													echo "<tr>			
-													<td>$row[환자번호]</td>												
+													echo "<tr>														
 													<td>$row[이름]</td>
 													<td>$row[연락처]</td>
 													<td>$row[병명]</td>

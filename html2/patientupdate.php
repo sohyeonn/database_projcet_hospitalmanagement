@@ -5,7 +5,9 @@
   
   $query = "SELECT a.이름, a.연락처, a.병명, b.의사이름, a.치료날짜, a.수술여부, a.호실, a.비용, a.장기이식필요유무, a.특이사항 from 환자 
   as a LEFT OUTER JOIN 의사 as b ON a.담당교수=b.의사번호 where a.환자번호='$pid';";
-  
+   //환자 정보 수정
+  //환자번호가 $pid인 정보를 가져와서 수정할 정보를 정보를 제공
+  //의사번호를 이름으로 바꾸기 위해 left outer join 이용
   $result = mysqli_query($conn, $query);
 
   $query1 = "SELECT 의사번호 FROM 의사 WHERE 의사이름 = '$dc'";

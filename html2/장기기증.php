@@ -102,7 +102,7 @@
 												<table id="myTable" width="800" border="1">
 													<tr>
 														<th>기증품목이름</th>
-														<th>갯수</th>
+														<th>개수</th>
 													</tr>
 													<!--<td><a href='content.php?id=$row[id]'>$row[id]</a></td>-->
 													<?php
